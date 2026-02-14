@@ -17,6 +17,7 @@
   --transition-fast: 0.2s ease-out;
 }
 
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -76,6 +77,7 @@ font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-seri
 }
 
 /* --------- SHELL / LAYOUT --------- */
+body { font-size: 18px; }
 
 .app-shell,
 .shell {
@@ -191,8 +193,17 @@ header,
 .panel-header {
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: flex-end;
   margin-bottom: 12px;
+}
+
+.panel-status {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  font-size: 0.9rem;
+  color: var(--text-soft);
 }
 
 .panel-title {
@@ -206,6 +217,44 @@ header,
   font-size: 0.85rem;
   color: var(--text-muted);
 }
+
+.status-label-compact {
+  font-size: 0.85rem;
+  color: var(--text-soft);
+}
+.legend {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 0.9rem;
+  color: var(--text-soft);
+  margin-bottom: 8px;
+  margin-top: 4px;
+}
+
+.legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legend-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 4px;
+  border: 1px solid var(--border-soft);
+}
+
+.legend-dot-green {
+  background: rgba(32, 201, 151, 0.2);
+  border-color: #20c997;
+}
+
+.legend-dot-red {
+  background: rgba(255, 77, 79, 0.2);
+  border-color: #ff4d4f;
+}
+
 
 /* board 4x4 */
 
@@ -302,8 +351,8 @@ header,
   transform: rotateY(180deg);
   display: flex;
   flex-direction: column;
-  padding: 14px 14px 14px;      /* víc místa */
-  gap: 10px;
+  padding: 18px 16px 18px;     /* víc místa */
+  gap: 12px;
   align-items: stretch;
 }
 
@@ -320,6 +369,10 @@ header,
   justify-content: space-between;
   align-items: center;
   margin-top: 8px;
+}
+.tile-back-actions .btn {
+  padding: 10px 18px;
+  font-size: 1.05rem;
 }
 .tile-back-actions .btn-primary,
 .tile-back-actions .btn-ghost {
@@ -350,7 +403,8 @@ header,
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 6px;
+  padding: 12px;
+  min-height: 150px;
 }
 
 .qr-box img {
@@ -473,9 +527,10 @@ header,
 }
 
 .progress-bar {
-  margin-top: 8px;
+  margin-top: 4px;
+  margin-bottom: 10px;
   width: 100%;
-  height: 7px;
+  height: 8px;
   border-radius: 999px;
   background: #eaeaea;
   overflow: hidden;
