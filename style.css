@@ -397,6 +397,7 @@ header,
 
 .qr-box img {
   display: block;
+  max-height: 180px;          /* QR nebude větší než 180 px */
   width: auto;
   height: auto;
   max-width: 100%;
