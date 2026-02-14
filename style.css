@@ -397,7 +397,7 @@ header,
 
 .qr-box {
     flex: 1;
-  min-height: 150px;      /* můžeš snížit/zvýšit podle chuti */
+  min-height: 300px;      /* můžeš snížit/zvýšit podle chuti */
   border-radius: 8px;
   background: #fdfdfd;
   border: 1px dashed var(--border-soft);
@@ -409,7 +409,7 @@ header,
 
 .qr-box img {
   flex: 1;
-  min-height: 120px;            /* přidej */
+  min-height: 200px;            /* přidej */
   border-radius: 8px;
   background: #fdfdfd;
   border: 1px dashed var(--border-soft);
