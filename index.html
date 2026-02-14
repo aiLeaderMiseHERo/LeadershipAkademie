@@ -29,55 +29,43 @@
 
     <div class="layout">
   <section class="board-panel">
-    <div class="panel-header">
-      <div>
-        <div class="panel-title">Šachovnice misí</div>
-        <div class="panel-subtitle">
-          Klikni na libovolné pole X.Y, odhal misi a naskenuj QR nebo ji otevři tlačítkem.
-          Výsledek každé mise si označ na její podstránce.
-        </div>
+  <div class="panel-header">
+    <div>
+      <div class="panel-title">Šachovnice misí</div>
+      <div class="panel-subtitle">
+        Klikni na libovolné pole X.Y, odhal misi a naskenuj QR nebo ji otevři tlačítkem.
       </div>
     </div>
-    <div class="grid" id="board">
-      <!-- generuje JS -->
+    <div class="panel-status">
+      <span class="status-label-compact">Stav misí</span>
+      <span id="progressText">0 / 16 dokončených</span>
     </div>
-  </section>
+  </div>
+
+  <!-- LEGENDA -->
+  <div class="legend">
+    <span class="legend-item">
+      <span class="legend-dot legend-dot-green"></span>
+      Splněno
+    </span>
+    <span class="legend-item">
+      <span class="legend-dot legend-dot-red"></span>
+      Nesplněno
+    </span>
+  </div>
+
+  <!-- PROGRESS BAR -->
+  <div class="progress-bar">
+    <div class="progress-bar-fill" id="progressFill"></div>
+  </div>
+
+  <!-- ŠACHOVNICE -->
+  <div class="grid" id="board">
+    <!-- generuje JS -->
+  </div>
+</section>
 </div>
-      <section class="info-panel">
-        <div class="info-panel-content">
-          <h2 class="info-heading">Jak trénovat leadership na šachovnici</h2>
-          <p class="info-text">
-            Vyber si pole v matici, odhal misi a přes QR kód nebo tlačítko vstup do tréninkové situace.
-            Po splnění označ misi jako splněnou / nesplněnou – šachovnice si tvůj stav zapamatuje v tomto prohlížeči.
-          </p>
-
-          <div class="info-steps">
-            <div class="info-step">
-              <div class="step-index">1</div>
-              <div class="step-text">Klikni na libovolné pole X.Y a otoč kartu. Uvnitř najdeš QR kód a tlačítko <strong>Otevřít misi</strong>.</div>
-            </div>
-            <div class="info-step">
-              <div class="step-index">2</div>
-              <div class="step-text">Na podstránce si vyslechni AI avatara a splň zadání mise. Poté zvol <strong>Splnil</strong> nebo <strong>Nesplnil</strong>.</div>
-            </div>
-            <div class="info-step">
-              <div class="step-index">3</div>
-              <div class="step-text">Vrátíš se zpět na šachovnici – pole mise se zbarví zeleně nebo červeně podle tvého označení.</div>
-            </div>
-          </div>
-
-          <div class="progress-meta">
-            <span><span class="indicator-dot"></span> Stav misí</span>
-            <span id="progressText">0 / 16 dokončených</span>
-          </div>
-          <div class="progress-bar">
-            <div class="progress-bar-fill" id="progressFill"></div>
-          </div>
-          <div class="progress-label">
-            Pro ucelený trénink leadershipu doporučujeme postupně projít všech 16 misí (4×4).
-          </div>
-        </div>
-      </section>
+      
     </div>
   </div>
 
