@@ -385,7 +385,7 @@ header,
 
 .qr-box {
   flex: 1;
-  min-height: 100px;
+  min-height: 200px;
   border-radius: 8px;
   background: #fdfdfd;
   border: 1px dashed var(--border-soft);
@@ -413,7 +413,11 @@ header,
   align-items: center;
   margin-top: 8px;
 }
-
+.tile-back-actions .btn-primary,
+.tile-back-actions .btn-ghost {
+  flex: 1;
+  white-space: nowrap;      /* text v tlačítku na jednom řádku */
+}
 /* buttons */
 
 .btn {
