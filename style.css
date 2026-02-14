@@ -385,14 +385,14 @@ header,
 
 .qr-box {
   flex: 1;
-  min-height: 200px;
+  min-height: 180px;
   border-radius: 8px;
   background: #fdfdfd;
   border: 1px dashed var(--border-soft);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 4px;
+  padding: 2px;
 }
 
 .qr-box img {
