@@ -1,0 +1,765 @@
+:root {
+  --bg-page: #f5f5f5;
+  --bg-surface: #ffffff;
+  --bg-soft: #fafafa;
+  --border-soft: #e5e5e5;
+  --accent: #ff6a00;
+  --accent-soft: rgba(255, 106, 0, 0.16);
+  --accent-strong: #e85a00;
+  --success: #20c997;
+  --danger: #ff4d4f;
+  --text-main: #222222;
+  --text-muted: #666666;
+  --text-soft: #999999;
+  --radius-lg: 18px;
+  --radius-md: 12px;
+  --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.06);
+  --transition-fast: 0.2s ease-out;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: var(--bg-page);
+  color: var(--text-main);
+}
+
+/* --------- SHELL / LAYOUT --------- */
+
+.app-shell,
+.shell {
+  max-width: 1200px;
+  width: 100%;
+  margin: 24px auto;
+  padding: 24px 24px 20px;
+  background: var(--bg-surface);
+  border-radius: 22px;
+  border: 1px solid var(--border-soft);
+  box-shadow: var(--shadow-soft);
+}
+
+/* header */
+
+header,
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand-logo {
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  background: radial-gradient(circle at 30% 30%, #ffb36b 0, #ff6a00 45%, #e85a00 70%);
+  box-shadow: 0 0 0 3px #ffffff, 0 8px 20px rgba(0, 0, 0, 0.18);
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.brand-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.brand-subtitle {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.header-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.pill {
+  padding: 5px 11px;
+  border-radius: 999px;
+  border: 1px solid var(--border-soft);
+  font-size: 0.8rem;
+  color: var(--text-soft);
+  background: var(--bg-soft);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pill-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--success);
+}
+
+.pill-cta {
+  border-color: var(--accent-soft);
+  color: var(--accent-strong);
+  background: rgba(255, 106, 0, 0.06);
+}
+
+/* layout columns */
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 2.1fr) minmax(0, 1.4fr);
+  gap: 18px;
+}
+
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* panels / cards */
+
+.board-panel,
+.info-panel,
+.card {
+  background: var(--bg-soft);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-soft);
+  padding: 16px 16px 18px;
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 12px;
+}
+
+.panel-title {
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-soft);
+}
+
+.panel-subtitle {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* board 4x4 */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.tile-wrapper {
+  perspective: 900px;
+}
+
+.tile {
+  position: relative;
+  width: 100%;
+  padding-top: 100%;
+  cursor: pointer;
+}
+
+.tile-inner {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-md);
+  transition: transform var(--transition-fast);
+  transform-style: preserve-3d;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+.tile.flipped .tile-inner {
+  transform: rotateY(180deg);
+}
+
+.tile-face {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-md);
+  backface-visibility: hidden;
+  border: 1px solid var(--border-soft);
+  overflow: hidden;
+}
+
+/* front */
+
+.tile-front {
+  background: linear-gradient(145deg, #ffffff, #f7f7f7);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  transition: background var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.tile-front:hover {
+  background: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.12);
+}
+
+.coord-label {
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent-strong);
+}
+
+.coord-sub {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.tile-status {
+  position: absolute;
+  inset: 8px;
+  border-radius: inherit;
+  border: 2px solid transparent;
+  pointer-events: none;
+}
+
+.tile-status.done {
+  border-color: var(--success);
+}
+
+.tile-status.failed {
+  border-color: var(--danger);
+}
+
+/* back */
+
+.tile-back {
+  background: #ffffff;
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  padding: 10px 10px 11px;
+  gap: 8px;
+  align-items: stretch;
+}
+
+.tile-back-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.badge {
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: rgba(255, 106, 0, 0.08);
+  border: 1px solid var(--accent-soft);
+  color: var(--accent-strong);
+}
+
+.mini-label {
+  font-size: 0.7rem;
+  color: var(--text-soft);
+}
+
+.qr-box {
+  flex: 1;
+  border-radius: 8px;
+  background: #fdfdfd;
+  border: 1px dashed var(--border-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+}
+
+.qr-box img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+/* buttons */
+
+.btn {
+  border-radius: 999px;
+  border: 1px solid transparent;
+  padding: 6px 12px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: transparent;
+  color: var(--text-main);
+  transition: background var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #ff6a00, #ff8c3a);
+  border-color: rgba(0, 0, 0, 0.04);
+  color: #ffffff;
+  box-shadow: 0 10px 20px rgba(255, 106, 0, 0.25);
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 26px rgba(255, 106, 0, 0.32);
+}
+
+.btn-ghost {
+  border-color: var(--border-soft);
+  color: var(--text-soft);
+  background: #ffffff;
+}
+
+.btn-ghost:hover {
+  background: #f7f7f7;
+}
+
+/* info panel */
+
+.info-panel-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.info-heading {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.info-text {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.info-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 0.85rem;
+}
+
+.info-step {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.step-index {
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  background: rgba(255, 106, 0, 0.08);
+  border: 1px solid var(--accent-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  color: var(--accent-strong);
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.step-text {
+  color: var(--text-muted);
+}
+
+.progress-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 4px;
+  font-size: 0.8rem;
+  color: var(--text-soft);
+}
+
+.indicator-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--accent-strong);
+  box-shadow: 0 0 0 4px var(--accent-soft);
+}
+
+.progress-bar {
+  margin-top: 8px;
+  width: 100%;
+  height: 7px;
+  border-radius: 999px;
+  background: #eaeaea;
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-bar-fill {
+  position: absolute;
+  inset: 0;
+  width: 0%;
+  background: linear-gradient(90deg, #ff6a00, #ffb36b);
+  border-radius: inherit;
+  transition: width 0.3s ease-out;
+}
+
+.progress-label {
+  font-size: 0.8rem;
+  color: var(--text-soft);
+  margin-top: 4px;
+}
+
+/* mission page specifics */
+
+.title-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.title {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.subtitle {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.footer {
+  margin-top: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+  color: var(--text-soft);
+}
+
+@media (max-width: 600px) {
+  .app-shell,
+  .shell {
+    margin: 12px;
+    padding: 18px 14px 14px;
+  }
+  .footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+}
+
+.mission-name {
+  font-size: 1.0rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.mission-goal {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+
+.mission-meta {
+  font-size: 0.85rem;
+  color: var(--text-soft);
+  margin-bottom: 10px;
+}
+
+.avatar-wrapper {
+  margin-top: 8px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--border-soft);
+  background: #000;
+  aspect-ratio: 16 / 9;
+}
+
+.avatar-wrapper iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+.status-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.status-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.status-info {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.status-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.status-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  background: var(--accent-strong);
+  box-shadow: 0 0 0 4px var(--accent-soft);
+}
+2) index.html (aktualizovaný, s externím CSS)
+xml
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <title>Leadership Akademie – Šachovnice</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header>
+      <div class="brand">
+        <div class="brand-logo"></div>
+        <div class="brand-text">
+          <div class="brand-title">Leadership Akademie</div>
+          <div class="brand-subtitle">Gamifikovaná šachovnice pro ředitele škol</div>
+        </div>
+      </div>
+      <div class="header-meta">
+        <div class="pill">
+          <span class="pill-dot"></span>
+          Režim mise
+        </div>
+        <div class="pill pill-cta">
+          16 misí · úroveň: Ředitel – Leader
+        </div>
+      </div>
+    </header>
+
+    <div class="layout">
+      <section class="board-panel">
+        <div class="panel-header">
+          <div>
+            <div class="panel-title">Šachovnice misí</div>
+            <div class="panel-subtitle">Klikni na libovolné pole X.Y, odhal misi a naskenuj QR nebo ji otevři tlačítkem.</div>
+          </div>
+        </div>
+        <div class="grid" id="board">
+          <!-- generuje JS -->
+        </div>
+      </section>
+
+      <section class="info-panel">
+        <div class="info-panel-content">
+          <h2 class="info-heading">Jak trénovat leadership na šachovnici</h2>
+          <p class="info-text">
+            Vyber si pole v matici, odhal misi a přes QR kód nebo tlačítko vstup do tréninkové situace.
+            Po splnění označ misi jako splněnou / nesplněnou – šachovnice si tvůj stav zapamatuje v tomto prohlížeči.
+          </p>
+
+          <div class="info-steps">
+            <div class="info-step">
+              <div class="step-index">1</div>
+              <div class="step-text">Klikni na libovolné pole X.Y a otoč kartu. Uvnitř najdeš QR kód a tlačítko <strong>Otevřít misi</strong>.</div>
+            </div>
+            <div class="info-step">
+              <div class="step-index">2</div>
+              <div class="step-text">Na podstránce si vyslechni AI avatara a splň zadání mise. Poté zvol <strong>Splnil</strong> nebo <strong>Nesplnil</strong>.</div>
+            </div>
+            <div class="info-step">
+              <div class="step-index">3</div>
+              <div class="step-text">Vrátíš se zpět na šachovnici – pole mise se zbarví zeleně nebo červeně podle tvého označení.</div>
+            </div>
+          </div>
+
+          <div class="progress-meta">
+            <span><span class="indicator-dot"></span> Stav misí</span>
+            <span id="progressText">0 / 16 dokončených</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-bar-fill" id="progressFill"></div>
+          </div>
+          <div class="progress-label">
+            Pro ucelený trénink leadershipu doporučujeme postupně projít všech 16 misí (4×4).
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    const ROWS = 4;
+    const COLS = 4;
+    const TOTAL_MISSIONS = ROWS * COLS;
+    const BOARD_ELEMENT = document.getElementById('board');
+    const STORAGE_PREFIX = 'leadership_akademie_mise_';
+
+    function createBoard() {
+      for (let x = 1; x <= ROWS; x++) {
+        for (let y = 1; y <= COLS; y++) {
+          const coord = x + '.' + y;
+          const tileWrapper = document.createElement('div');
+          tileWrapper.className = 'tile-wrapper';
+
+          const tile = document.createElement('div');
+          tile.className = 'tile';
+          tile.dataset.x = x;
+          tile.dataset.y = y;
+
+          const tileInner = document.createElement('div');
+          tileInner.className = 'tile-inner';
+
+          const front = document.createElement('div');
+          front.className = 'tile-face tile-front';
+
+          const coordLabel = document.createElement('div');
+          coordLabel.className = 'coord-label';
+          coordLabel.textContent = 'Mise ' + coord;
+
+          const coordSub = document.createElement('div');
+          coordSub.className = 'coord-sub';
+          coordSub.textContent = 'Klikni pro odhalení';
+
+          const statusOverlay = document.createElement('div');
+          statusOverlay.className = 'tile-status';
+          statusOverlay.id = 'status-' + x + '-' + y;
+
+          front.appendChild(coordLabel);
+          front.appendChild(coordSub);
+          front.appendChild(statusOverlay);
+
+          const back = document.createElement('div');
+          back.className = 'tile-face tile-back';
+
+          const backTop = document.createElement('div');
+          backTop.className = 'tile-back-top';
+
+          const badge = document.createElement('div');
+          badge.className = 'badge';
+          badge.textContent = 'Mise ' + coord;
+
+          const miniLabel = document.createElement('div');
+          miniLabel.className = 'mini-label';
+          miniLabel.textContent = 'Naskenuj QR nebo otevři misi';
+
+          backTop.appendChild(badge);
+          backTop.appendChild(miniLabel);
+
+          const qrBox = document.createElement('div');
+          qrBox.className = 'qr-box';
+
+          const qrImg = document.createElement('img');
+          // QR obrázky: ./qr/qr-mise-X-Y.png
+          qrImg.src = './qr/qr-mise-' + x + '-' + y + '.png';
+          qrImg.alt = 'QR kód pro misi ' + coord;
+
+          qrBox.appendChild(qrImg);
+
+          const backActions = document.createElement('div');
+          backActions.className = 'tile-back-actions';
+
+          const openBtn = document.createElement('a');
+          openBtn.className = 'btn btn-primary';
+          openBtn.textContent = 'Otevřít misi';
+          openBtn.href = 'mise-' + x + '-' + y + '.html';
+
+          const closeBtn = document.createElement('button');
+          closeBtn.className = 'btn btn-ghost';
+          closeBtn.type = 'button';
+          closeBtn.textContent = 'Zavřít';
+
+          backActions.appendChild(openBtn);
+          backActions.appendChild(closeBtn);
+
+          back.appendChild(backTop);
+          back.appendChild(qrBox);
+          back.appendChild(backActions);
+
+          tileInner.appendChild(front);
+          tileInner.appendChild(back);
+          tile.appendChild(tileInner);
+          tileWrapper.appendChild(tile);
+          BOARD_ELEMENT.appendChild(tileWrapper);
+
+          tile.addEventListener('click', function (e) {
+            if (e.target === closeBtn) return;
+            tile.classList.toggle('flipped');
+          });
+
+          closeBtn.addEventListener('click', function (e) {
+            e.stopPropagation();
+            tile.classList.remove('flipped');
+          });
+        }
+      }
+    }
+
+    function loadStatus() {
+      let doneCount = 0;
+      for (let x = 1; x <= ROWS; x++) {
+        for (let y = 1; y <= COLS; y++) {
+          const statusEl = document.getElementById('status-' + x + '-' + y);
+          if (!statusEl) continue;
+          const key = STORAGE_PREFIX + x + '_' + y;
+          const value = localStorage.getItem(key);
+
+          statusEl.classList.remove('done', 'failed');
+
+          if (value === 'done') {
+            statusEl.classList.add('done');
+            doneCount++;
+          } else if (value === 'failed') {
+            statusEl.classList.add('failed');
+          }
+        }
+      }
+
+      const progressText = document.getElementById('progressText');
+      const fill = document.getElementById('progressFill');
+      const percent = Math.round((doneCount / TOTAL_MISSIONS) * 100);
+      progressText.textContent = doneCount + ' / ' + TOTAL_MISSIONS + ' dokončených';
+      fill.style.width = percent + '%';
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      createBoard();
+      loadStatus();
+    });
+  </script>
+</body>
+</html>
