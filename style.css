@@ -17,67 +17,78 @@
   --transition-fast: 0.2s ease-out;
 }
 
-
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   background: var(--bg-page);
   color: var(--text-main);
-  font-size: 18px;             /* přidat */
+  font-size: 18px;
 }
+
+/* velikosti textů */
+
 .brand-title {
-  font-size: 1.6rem;           /* bylo 1.1rem */
+  font-size: 1.6rem;
 }
+
 .brand-subtitle {
-  font-size: 1.1rem;           /* bylo 0.85rem */
+  font-size: 1.1rem;
 }
+
 .panel-title {
-  font-size: 1.2rem;           /* bylo 0.95rem */
+  font-size: 1.2rem;
 }
+
 .panel-subtitle {
-  font-size: 1.1rem;           /* bylo 0.85rem */
+  font-size: 1.1rem;
 }
+
 .coord-label {
-  font-size: 1.3rem;           /* bylo 0.9rem */
+  font-size: 1.3rem;
 }
+
 .coord-sub {
-  font-size: 1.0rem;           /* bylo 0.75rem */
+  font-size: 1.0rem;
 }
+
 .badge {
-  font-size: 0.95rem;          /* bylo 0.7rem */
+  font-size: 0.95rem;
 }
+
 .mini-label {
-  font-size: 0.95rem;          /* bylo 0.7rem */
+  font-size: 0.95rem;
 }
-.btn {
-  font-size: 1.0rem;           /* bylo 0.8rem */
-  padding: 10px 18px;          /* větší klik zóna */
-}
+
 .pill {
-  font-size: 1.0rem;           /* bylo 0.8rem */
+  font-size: 1.0rem;
 }
+
 .mission-name {
-  font-size: 1.3rem;           /* bylo 1.0rem */
+  font-size: 1.3rem;
 }
+
 .mission-goal {
-  font-size: 1.1rem;           /* bylo 0.9rem */
+  font-size: 1.1rem;
 }
+
 .mission-meta {
-  font-size: 1.0rem;           /* bylo 0.85rem */
+  font-size: 1.0rem;
 }
+
 .status-info {
-  font-size: 1.0rem;           /* bylo 0.85rem */
+  font-size: 1.0rem;
 }
+
 .footer {
-  font-size: 0.95rem;          /* bylo 0.8rem */
+  font-size: 0.95rem;
 }
 
 /* --------- SHELL / LAYOUT --------- */
-body { font-size: 18px; }
 
 .app-shell,
 .shell {
@@ -124,12 +135,10 @@ header,
 }
 
 .brand-title {
-  font-size: 1.1rem;
   font-weight: 600;
 }
 
 .brand-subtitle {
-  font-size: 0.85rem;
   color: var(--text-muted);
 }
 
@@ -144,7 +153,6 @@ header,
   padding: 5px 11px;
   border-radius: 999px;
   border: 1px solid var(--border-soft);
-  font-size: 0.8rem;
   color: var(--text-soft);
   background: var(--bg-soft);
   display: inline-flex;
@@ -207,14 +215,12 @@ header,
 }
 
 .panel-title {
-  font-size: 0.95rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--text-soft);
 }
 
 .panel-subtitle {
-  font-size: 0.85rem;
   color: var(--text-muted);
 }
 
@@ -222,6 +228,9 @@ header,
   font-size: 0.85rem;
   color: var(--text-soft);
 }
+
+/* legenda */
+
 .legend {
   display: flex;
   align-items: center;
@@ -254,7 +263,6 @@ header,
   background: rgba(255, 77, 79, 0.2);
   border-color: #ff4d4f;
 }
-
 
 /* board 4x4 */
 
@@ -317,14 +325,12 @@ header,
 }
 
 .coord-label {
-  font-size: 0.9rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--accent-strong);
 }
 
 .coord-sub {
-  font-size: 0.75rem;
   color: var(--text-muted);
 }
 
@@ -351,7 +357,7 @@ header,
   transform: rotateY(180deg);
   display: flex;
   flex-direction: column;
-  padding: 18px 16px 18px;     /* víc místa */
+  padding: 18px 16px 18px;
   gap: 12px;
   align-items: stretch;
 }
@@ -362,25 +368,8 @@ header,
   align-items: center;
   gap: 8px;
 }
-/* sekce s tlačítky – trochu větší gap a full width */
-.tile-back-actions {
-  display: flex;
-  gap: 10px;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 8px;
-}
-.tile-back-actions .btn {
-  padding: 10px 18px;
-  font-size: 1.05rem;
-}
-.tile-back-actions .btn-primary,
-.tile-back-actions .btn-ghost {
-  flex: 1;                      /* tlačítka přes celou šířku */
-}
 
 .badge {
-  font-size: 0.7rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   padding: 3px 8px;
@@ -391,37 +380,38 @@ header,
 }
 
 .mini-label {
-  font-size: 0.7rem;
   color: var(--text-soft);
 }
 
 .qr-box {
-    flex: 1;
-  min-height: 100px;      /* můžeš snížit/zvýšit podle chuti */
+  flex: 1;
+  min-height: 100px;
   border-radius: 8px;
   background: #fdfdfd;
   border: 1px dashed var(--border-soft);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2px;          /* případná mezera kolem QR */
+  padding: 4px;
 }
 
 .qr-box img {
-  flex: 1;
-  min-height: 200px;            /* přidej */
-  border-radius: 8px;
-  background: #fdfdfd;
-  border: 1px dashed var(--border-soft);
-  align-items: center;
-  justify-content: center;
-  padding: 2px;
   display: block;
   width: 100%;
-  height: 100%;
+  height: auto;
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
+}
+
+/* sekce s tlačítky na zadní straně */
+
+.tile-back-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8px;
 }
 
 /* buttons */
@@ -429,8 +419,8 @@ header,
 .btn {
   border-radius: 999px;
   border: 1px solid transparent;
-  padding: 6px 12px;
-  font-size: 0.8rem;
+  padding: 10px 18px;
+  font-size: 1.0rem;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
@@ -463,7 +453,12 @@ header,
   background: #f7f7f7;
 }
 
-/* info panel */
+.tile-back-actions .btn-primary,
+.tile-back-actions .btn-ghost {
+  flex: 1;
+}
+
+/* info panel (už skoro nepoužíváš, ale nevadí) */
 
 .info-panel-content {
   display: flex;
@@ -580,7 +575,6 @@ header,
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 0.8rem;
   color: var(--text-soft);
 }
 
@@ -598,20 +592,17 @@ header,
 }
 
 .mission-name {
-  font-size: 1.0rem;
   font-weight: 600;
   margin-bottom: 6px;
 }
 
 .mission-goal {
-  font-size: 0.9rem;
   color: var(--text-muted);
   line-height: 1.5;
   margin-bottom: 10px;
 }
 
 .mission-meta {
-  font-size: 0.85rem;
   color: var(--text-soft);
   margin-bottom: 10px;
 }
@@ -629,7 +620,6 @@ header,
 }
 
 .status-info {
-  font-size: 0.85rem;
   color: var(--text-muted);
   line-height: 1.4;
 }
@@ -648,17 +638,12 @@ header,
   background: var(--accent-strong);
   box-shadow: 0 0 0 4px var(--accent-soft);
 }
+
+/* mise – layout */
+
 .mission-layout {
   grid-template-columns: minmax(0, 1fr);
 }
-
-@media (max-width: 900px) {
-  .mission-layout {
-    grid-template-columns: minmax(0, 1fr);
-  }
-}
-
-/* karta s videem – necháme text nahoře a video pod ním */
 
 .mission-card-left {
   display: flex;
@@ -666,13 +651,8 @@ header,
   gap: 10px;
 }
 
-/* Full width video v rámci app-shell */
+/* Full width video */
 
-.video-full {
-  margin-top: 8px;
-}
-
-/* Container podle vzoru „responsive iframe 16:9“ */
 .video-container {
   width: 100%;
   max-width: 100%;
@@ -683,7 +663,6 @@ header,
   background: #000;
 }
 
-/* nativní responsive iframe – 100 % šířky, 16:9 poměr */
 .video-container iframe {
   display: block;
   width: 100%;
