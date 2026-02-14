@@ -23,10 +23,56 @@
   padding: 0;
 }
 
-body {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   background: var(--bg-page);
   color: var(--text-main);
+  font-size: 18px;             /* přidat */
+}
+.brand-title {
+  font-size: 1.6rem;           /* bylo 1.1rem */
+}
+.brand-subtitle {
+  font-size: 1.1rem;           /* bylo 0.85rem */
+}
+.panel-title {
+  font-size: 1.2rem;           /* bylo 0.95rem */
+}
+.panel-subtitle {
+  font-size: 1.1rem;           /* bylo 0.85rem */
+}
+.coord-label {
+  font-size: 1.3rem;           /* bylo 0.9rem */
+}
+.coord-sub {
+  font-size: 1.0rem;           /* bylo 0.75rem */
+}
+.badge {
+  font-size: 0.95rem;          /* bylo 0.7rem */
+}
+.mini-label {
+  font-size: 0.95rem;          /* bylo 0.7rem */
+}
+.btn {
+  font-size: 1.0rem;           /* bylo 0.8rem */
+  padding: 10px 18px;          /* větší klik zóna */
+}
+.pill {
+  font-size: 1.0rem;           /* bylo 0.8rem */
+}
+.mission-name {
+  font-size: 1.3rem;           /* bylo 1.0rem */
+}
+.mission-goal {
+  font-size: 1.1rem;           /* bylo 0.9rem */
+}
+.mission-meta {
+  font-size: 1.0rem;           /* bylo 0.85rem */
+}
+.status-info {
+  font-size: 1.0rem;           /* bylo 0.85rem */
+}
+.footer {
+  font-size: 0.95rem;          /* bylo 0.8rem */
 }
 
 /* --------- SHELL / LAYOUT --------- */
@@ -256,8 +302,8 @@ header,
   transform: rotateY(180deg);
   display: flex;
   flex-direction: column;
-  padding: 10px 10px 11px;
-  gap: 8px;
+  padding: 14px 14px 14px;      /* víc místa */
+  gap: 10px;
   align-items: stretch;
 }
 
@@ -266,6 +312,18 @@ header,
   justify-content: space-between;
   align-items: center;
   gap: 8px;
+}
+/* sekce s tlačítky – trochu větší gap a full width */
+.tile-back-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8px;
+}
+.tile-back-actions .btn-primary,
+.tile-back-actions .btn-ghost {
+  flex: 1;                      /* tlačítka přes celou šířku */
 }
 
 .badge {
@@ -296,9 +354,15 @@ header,
 }
 
 .qr-box img {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
+  flex: 1;
+  min-height: 120px;            /* přidej */
+  border-radius: 8px;
+  background: #fdfdfd;
+  border: 1px dashed var(--border-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
 }
 
 /* buttons */
