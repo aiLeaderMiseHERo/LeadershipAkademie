@@ -1,3 +1,12 @@
+Pošlu ti kompletně nový, mobil‑first style.css, který sjednotí hlavní stránku i mise, udělá grid responzivní a QR i video budou fungovat dobře na desktopu i mobilech.
+
+Zkopíruj celý kód níž jako nový style.css (starý přepiš):
+
+css
+/* =========================================
+   ZÁKLAD – MOBILE FIRST
+========================================= */
+
 :root {
   --bg-page: #f5f5f5;
   --bg-surface: #ffffff;
@@ -27,77 +36,21 @@ body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   background: var(--bg-page);
   color: var(--text-main);
-  font-size: 18px;
+  font-size: 16px;                /* mobile base */
 }
 
-/* velikosti textů */
-
-.brand-title {
-  font-size: 1.6rem;
-}
-
-.brand-subtitle {
-  font-size: 1.1rem;
-}
-
-.panel-title {
-  font-size: 1.2rem;
-}
-
-.panel-subtitle {
-  font-size: 1.1rem;
-}
-
-.coord-label {
-  font-size: 1.3rem;
-}
-
-.coord-sub {
-  font-size: 1.0rem;
-}
-
-.badge {
-  font-size: 0.95rem;
-}
-
-.mini-label {
-  font-size: 0.95rem;
-}
-
-.pill {
-  font-size: 1.0rem;
-}
-
-.mission-name {
-  font-size: 1.3rem;
-}
-
-.mission-goal {
-  font-size: 1.1rem;
-}
-
-.mission-meta {
-  font-size: 1.0rem;
-}
-
-.status-info {
-  font-size: 1.0rem;
-}
-
-.footer {
-  font-size: 0.95rem;
-}
-
-/* --------- SHELL / LAYOUT --------- */
+/* =========================================
+   SHELL / LAYOUT
+========================================= */
 
 .app-shell,
 .shell {
   max-width: 1200px;
   width: 100%;
-  margin: 24px auto;
-  padding: 24px 24px 20px;
+  margin: 12px auto;
+  padding: 16px 12px 14px;
   background: var(--bg-surface);
-  border-radius: 22px;
+  border-radius: 18px;
   border: 1px solid var(--border-soft);
   box-shadow: var(--shadow-soft);
 }
@@ -108,10 +61,10 @@ header,
 .header {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 10px;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 18px;
+  margin-bottom: 14px;
 }
 
 .brand {
@@ -121,38 +74,43 @@ header,
 }
 
 .brand-logo {
-  width: 34px;
-  height: 34px;
+  width: 30px;
+  height: 30px;
   border-radius: 999px;
   background: radial-gradient(circle at 30% 30%, #ffb36b 0, #ff6a00 45%, #e85a00 70%);
-  box-shadow: 0 0 0 3px #ffffff, 0 8px 20px rgba(0, 0, 0, 0.18);
+  box-shadow: 0 0 0 2px #ffffff, 0 6px 16px rgba(0, 0, 0, 0.18);
 }
 
 .brand-text {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 1px;
 }
 
 .brand-title {
+  font-size: 1.1rem;
   font-weight: 600;
 }
 
 .brand-subtitle {
+  font-size: 0.9rem;
   color: var(--text-muted);
 }
 
 .header-meta {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 8px;
   align-items: center;
 }
 
+/* pills */
+
 .pill {
-  padding: 5px 11px;
+  padding: 4px 10px;
   border-radius: 999px;
   border: 1px solid var(--border-soft);
+  font-size: 0.8rem;
   color: var(--text-soft);
   background: var(--bg-soft);
   display: inline-flex;
@@ -173,21 +131,17 @@ header,
   background: rgba(255, 106, 0, 0.06);
 }
 
-/* layout columns */
+/* obecný layout uvnitř shellu */
 
 .layout {
   display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 18px;
+  grid-template-columns: minmax(0, 1fr);  /* mobile: 1 sloupec */
+  gap: 14px;
 }
 
-@media (max-width: 900px) {
-  .layout {
-    grid-template-columns: minmax(0, 1fr);
-  }
-}
-
-/* panels / cards */
+/* =========================================
+   KARTY / PANELY
+========================================= */
 
 .board-panel,
 .info-panel,
@@ -195,14 +149,26 @@ header,
   background: var(--bg-soft);
   border-radius: var(--radius-lg);
   border: 1px solid var(--border-soft);
-  padding: 16px 16px 18px;
+  padding: 12px 12px 14px;
 }
 
 .panel-header {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
+}
+
+.panel-title {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-soft);
+}
+
+.panel-subtitle {
+  font-size: 0.85rem;
+  color: var(--text-muted);
 }
 
 .panel-status {
@@ -210,35 +176,26 @@ header,
   flex-direction: column;
   align-items: flex-end;
   gap: 2px;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   color: var(--text-soft);
-}
-
-.panel-title {
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--text-soft);
-}
-
-.panel-subtitle {
-  color: var(--text-muted);
 }
 
 .status-label-compact {
-  font-size: 0.85rem;
-  color: var(--text-soft);
+  font-size: 0.8rem;
 }
 
-/* legenda */
+/* =========================================
+   LEGENDA A PROGRESS (hlavní stránka)
+========================================= */
 
 .legend {
   display: flex;
   align-items: center;
-  gap: 16px;
-  font-size: 0.9rem;
+  gap: 12px;
+  font-size: 0.8rem;
   color: var(--text-soft);
-  margin-bottom: 8px;
-  margin-top: 4px;
+  margin-bottom: 6px;
+  margin-top: 2px;
 }
 
 .legend-item {
@@ -248,8 +205,8 @@ header,
 }
 
 .legend-dot {
-  width: 14px;
-  height: 14px;
+  width: 12px;
+  height: 12px;
   border-radius: 4px;
   border: 1px solid var(--border-soft);
 }
@@ -264,13 +221,66 @@ header,
   border-color: #ff4d4f;
 }
 
-/* board 4x4 */
+.progress-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2px;
+  font-size: 0.8rem;
+  color: var(--text-soft);
+}
+
+.indicator-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--accent-strong);
+  box-shadow: 0 0 0 4px var(--accent-soft);
+}
+
+.progress-bar {
+  margin-top: 4px;
+  margin-bottom: 8px;
+  width: 100%;
+  height: 6px;
+  border-radius: 999px;
+  background: #eaeaea;
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-bar-fill {
+  position: absolute;
+  inset: 0;
+  width: 0%;
+  background: linear-gradient(90deg, #ff6a00, #ffb36b);
+  border-radius: inherit;
+  transition: width 0.3s ease-out;
+}
+
+/* =========================================
+   GRID ŠACHOVNICE – MOBILE FIRST
+========================================= */
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1fr); /* mobile: 1 sloupec */
   gap: 10px;
   margin-top: 4px;
+}
+
+/* tablety: 2 sloupce */
+@media (min-width: 600px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* desktop: 4 sloupce */
+@media (min-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
 }
 
 .tile-wrapper {
@@ -280,7 +290,7 @@ header,
 .tile {
   position: relative;
   width: 100%;
-  padding-top: 100%;
+  padding-top: 115%; /* trochu vyšší než čtverec – víc místa na QR + tlačítka */
   cursor: pointer;
 }
 
@@ -325,12 +335,14 @@ header,
 }
 
 .coord-label {
+  font-size: 1rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--accent-strong);
 }
 
 .coord-sub {
+  font-size: 0.8rem;
   color: var(--text-muted);
 }
 
@@ -357,35 +369,32 @@ header,
   transform: rotateY(180deg);
   display: flex;
   flex-direction: column;
-  padding: 10px 10px 10px;   /* méně vnitřního prostoru */
-  gap: 10px;
+  padding: 10px 10px 10px;
+  gap: 8px;
   align-items: stretch;
 }
 
 .tile-back-top {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
-  gap: 8px;
 }
 
 .badge {
+  font-size: 0.85rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  padding: 3px 8px;
+  padding: 4px 10px;
   border-radius: 999px;
   background: rgba(255, 106, 0, 0.08);
   border: 1px solid var(--accent-soft);
   color: var(--accent-strong);
 }
 
-.mini-label {
-  color: var(--text-soft);
-}
+/* QR box – responzivní, bez fixní výšky */
 
 .qr-box {
- flex: 1;
-  min-height: 160px;          /* prostor pro větší QR, ale s rezervou na tlačítka */
+  flex: 1;
   border-radius: 8px;
   background: #fdfdfd;
   border: 1px dashed var(--border-soft);
@@ -393,18 +402,19 @@ header,
   align-items: center;
   justify-content: center;
   padding: 8px;
+  margin-top: 4px;
 }
 
 .qr-box img {
   display: block;
-  max-height: 180px;          /* QR nebude větší než 180 px */
-  width: auto;
+  width: 100%;
   height: auto;
   max-width: 100%;
+  max-height: 100%;
   object-fit: contain;
 }
 
-/* sekce s tlačítky na zadní straně */
+/* tlačítka pod QR */
 
 .tile-back-actions {
   display: flex;
@@ -413,17 +423,15 @@ header,
   align-items: center;
   margin-top: 4px;
 }
-.tile-back-actions .btn-primary,
-.tile-back-actions .btn-ghost {
-  flex: 1;
-  white-space: nowrap;      /* text v tlačítku na jednom řádku */
-}
-/* buttons */
+
+/* =========================================
+   BUTTONS – MOBILE FIRST
+========================================= */
 
 .btn {
   border-radius: 999px;
   border: 1px solid transparent;
-  padding: 6px 12px;         /* menší tlačítka */
+  padding: 8px 12px;
   font-size: 0.9rem;
   cursor: pointer;
   display: inline-flex;
@@ -439,12 +447,12 @@ header,
   background: linear-gradient(135deg, #ff6a00, #ff8c3a);
   border-color: rgba(0, 0, 0, 0.04);
   color: #ffffff;
-  box-shadow: 0 10px 20px rgba(255, 106, 0, 0.25);
+  box-shadow: 0 8px 16px rgba(255, 106, 0, 0.25);
 }
 
 .btn-primary:hover {
   transform: translateY(-1px);
-  box-shadow: 0 12px 26px rgba(255, 106, 0, 0.32);
+  box-shadow: 0 10px 22px rgba(255, 106, 0, 0.32);
 }
 
 .btn-ghost {
@@ -460,193 +468,25 @@ header,
 .tile-back-actions .btn-primary,
 .tile-back-actions .btn-ghost {
   flex: 1;
+  white-space: nowrap;
 }
 
-/* info panel (už skoro nepoužíváš, ale nevadí) */
+/* desktop – větší tlačítka */
 
-.info-panel-content {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.info-heading {
-  font-size: 1.1rem;
-  font-weight: 600;
-}
-
-.info-text {
-  font-size: 0.9rem;
-  color: var(--text-muted);
-  line-height: 1.5;
-}
-
-.info-steps {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  font-size: 0.85rem;
-}
-
-.info-step {
-  display: flex;
-  gap: 10px;
-  align-items: flex-start;
-}
-
-.step-index {
-  width: 22px;
-  height: 22px;
-  border-radius: 999px;
-  background: rgba(255, 106, 0, 0.08);
-  border: 1px solid var(--accent-soft);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.8rem;
-  color: var(--accent-strong);
-  margin-top: 2px;
-  flex-shrink: 0;
-}
-
-.step-text {
-  color: var(--text-muted);
-}
-
-.progress-meta {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 4px;
-  font-size: 0.8rem;
-  color: var(--text-soft);
-}
-
-.indicator-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 999px;
-  background: var(--accent-strong);
-  box-shadow: 0 0 0 4px var(--accent-soft);
-}
-
-.progress-bar {
-  margin-top: 4px;
-  margin-bottom: 10px;
-  width: 100%;
-  height: 8px;
-  border-radius: 999px;
-  background: #eaeaea;
-  overflow: hidden;
-  position: relative;
-}
-
-.progress-bar-fill {
-  position: absolute;
-  inset: 0;
-  width: 0%;
-  background: linear-gradient(90deg, #ff6a00, #ffb36b);
-  border-radius: inherit;
-  transition: width 0.3s ease-out;
-}
-
-.progress-label {
-  font-size: 0.8rem;
-  color: var(--text-soft);
-  margin-top: 4px;
-}
-
-/* mission page specifics */
-
-.title-group {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.title {
-  font-size: 1.2rem;
-  font-weight: 600;
-}
-
-.subtitle {
-  font-size: 0.9rem;
-  color: var(--text-muted);
-}
-
-.footer {
-  margin-top: 16px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color: var(--text-soft);
-}
-
-@media (max-width: 600px) {
-  .app-shell,
-  .shell {
-    margin: 12px;
-    padding: 18px 14px 14px;
-  }
-  .footer {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 6px;
+@media (min-width: 900px) {
+  .btn {
+    padding: 10px 18px;
+    font-size: 1.0rem;
   }
 }
 
-.mission-name {
-  font-weight: 600;
-  margin-bottom: 6px;
-}
-
-.mission-goal {
-  color: var(--text-muted);
-  line-height: 1.5;
-  margin-bottom: 10px;
-}
-
-.mission-meta {
-  color: var(--text-soft);
-  margin-bottom: 10px;
-}
-
-.status-controls {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.status-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.status-info {
-  color: var(--text-muted);
-  line-height: 1.4;
-}
-
-.status-label {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  margin-bottom: 4px;
-}
-
-.status-dot {
-  width: 9px;
-  height: 9px;
-  border-radius: 999px;
-  background: var(--accent-strong);
-  box-shadow: 0 0 0 4px var(--accent-soft);
-}
-
-/* mise – layout */
+/* =========================================
+   MISSION PAGES (mise-X-Y)
+========================================= */
 
 .mission-layout {
-  grid-template-columns: minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr);  /* mobile: 1 sloupec */
+  gap: 12px;
 }
 
 .mission-card-left {
@@ -655,12 +495,30 @@ header,
   gap: 10px;
 }
 
-/* Full width video */
+.mission-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.mission-goal {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+
+.mission-meta {
+  font-size: 0.85rem;
+  color: var(--text-soft);
+  margin-bottom: 8px;
+}
+
+/* video – full width, 16:9 */
 
 .video-container {
   width: 100%;
-  max-width: 100%;
-  margin-top: 8px;
+  margin-top: 6px;
   border-radius: var(--radius-md);
   border: 1px solid var(--border-soft);
   overflow: hidden;
@@ -673,4 +531,95 @@ header,
   aspect-ratio: 16 / 9;
   height: auto;
   border: 0;
+}
+
+/* vyhodnocení mise */
+
+.status-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.status-buttons {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 8px;
+}
+
+.status-info {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.status-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.9rem;
+}
+
+.status-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  background: var(--accent-strong);
+  box-shadow: 0 0 0 4px var(--accent-soft);
+}
+
+/* footer */
+
+.footer {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.8rem;
+  color: var(--text-soft);
+}
+
+@media (min-width: 700px) {
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+/* =========================================
+   DESKTOP ÚPRAVY (větší písmo/rozestupy)
+========================================= */
+
+@media (min-width: 900px) {
+  body {
+    font-size: 18px;
+  }
+
+  .app-shell,
+  .shell {
+    margin: 24px auto;
+    padding: 24px 24px 20px;
+    border-radius: 22px;
+  }
+
+  .brand-title {
+    font-size: 1.4rem;
+  }
+
+  .brand-subtitle {
+    font-size: 1.0rem;
+  }
+
+  .panel-title {
+    font-size: 0.95rem;
+  }
+
+  .panel-subtitle {
+    font-size: 0.95rem;
+  }
+
+  .mission-layout {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1.2fr);
+  }
 }
