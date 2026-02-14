@@ -659,3 +659,46 @@ header,
   background: var(--accent-strong);
   box-shadow: 0 0 0 4px var(--accent-soft);
 }
+.mission-layout {
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1.2fr);
+}
+
+@media (max-width: 900px) {
+  .mission-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* karta s videem – necháme text nahoře a video pod ním */
+
+.mission-card-left {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Full width video v rámci app-shell */
+
+.video-full {
+  margin-top: 8px;
+}
+
+/* Container podle vzoru „responsive iframe 16:9“ */
+.video-container {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%; /* 16:9 poměr stran */
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-soft);
+  background: #000;
+}
+
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
