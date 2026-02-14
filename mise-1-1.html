@@ -7,18 +7,29 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="shell" data-x="1" data-y="1">
-    <div class="header">
-      <div class="title-group">
-        <div class="title">Mise 1.1 – Kmenové vůdcovství</div>
-        <div class="subtitle">Šachovnice Leadership Akademie · Ředitel – Leader</div>
+  <div class="app-shell">
+    <header>
+      <div class="brand">
+        <div class="brand-logo"></div>
+        <div class="brand-text">
+          <div class="brand-title">Leadership Akademie</div>
+          <div class="brand-subtitle">Mise 1.1 – Kmenové vůdcovství</div>
+        </div>
       </div>
-      <div class="pill">Souřadnice: 1.1</div>
-    </div>
+      <div class="header-meta">
+        <div class="pill">
+          Souřadnice: 1.1
+        </div>
+        <div class="pill pill-cta">
+          Šachovnice misí · Ředitel – Leader
+        </div>
+      </div>
+    </header>
 
-    <div class="layout">
-      <div class="card">
-        <h2>Zadání mise</h2>
+    <div class="layout mission-layout">
+      <!-- LEVÁ: Zadání mise + video přes celou šířku -->
+      <div class="card mission-card-left">
+        <h2 class="panel-title">Zadání mise</h2>
         <div class="mission-name">Mise 1.1: Rozpoznej úroveň kmenového vůdcovství a živel tvého učitele.</div>
         <div class="mission-goal">
           Vyslechni zadání od AI avatara, promysli konkrétního učitele z tvé školy a pojmenuj jeho aktuální úroveň
@@ -28,17 +39,21 @@
           Tip: Všímej si slovníku, energie a typických reakcí daného učitele. Jaký dopad má jeho styl na klima sborovny a výkonnost týmu?
         </div>
 
-        <div class="avatar-wrapper">
-          <iframe src="https://embed.liveavatar.com/v1/28d57a05-bf90-4875-ad15-e05d8fac45b4"
-                  allow="microphone"
-                  title="LiveAvatar Embed"
-                  style="aspect-ratio: 16/9;">
-          </iframe>
+        <!-- Video přes celou šířku shellu -->
+        <div class="video-full">
+          <div class="video-container">
+            <iframe
+              src="https://embed.liveavatar.com/v1/28d57a05-bf90-4875-ad15-e05d8fac45b4"
+              allow="microphone"
+              title="LiveAvatar Embed">
+            </iframe>
+          </div>
         </div>
       </div>
 
-      <div class="card">
-        <h2>Vyhodnocení mise</h2>
+      <!-- PRAVÁ: Vyhodnocení -->
+      <div class="card mission-card-right">
+        <h2 class="panel-title">Vyhodnocení mise</h2>
         <div class="status-controls">
           <div class="status-buttons">
             <button class="btn btn-primary" id="btnDone">Splnil jsem</button>
@@ -61,14 +76,13 @@
 
     <div class="footer">
       <span>Leadership Akademie – gamifikovaný trénink pro ředitele škol</span>
-      <span>Souřadnice mise: 1.1 · Kmenové vůdcovství & živly</span>
+      <span>Mise 1.1 · Kmenové vůdcovství & živly</span>
     </div>
   </div>
 
   <script>
-    const shell = document.querySelector('.shell');
-    const x = shell.dataset.x;
-    const y = shell.dataset.y;
+    const x = 1;
+    const y = 1;
     const STORAGE_KEY = 'leadership_akademie_mise_' + x + '_' + y;
 
     const btnDone = document.getElementById('btnDone');
