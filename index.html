@@ -118,14 +118,10 @@
 
           const badge = document.createElement('div');
           badge.className = 'badge';
-          badge.textContent = 'Mise ' + coord;
+          badge.textContent = 'MISE ' + coord;
 
-          const miniLabel = document.createElement('div');
-          miniLabel.className = 'mini-label';
-          miniLabel.textContent = 'Naskenuj QR nebo otevři misi';
-
+          
           backTop.appendChild(badge);
-          backTop.appendChild(miniLabel);
 
           const qrBox = document.createElement('div');
           qrBox.className = 'qr-box';
