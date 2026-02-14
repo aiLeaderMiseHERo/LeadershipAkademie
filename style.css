@@ -365,8 +365,7 @@ header,
   display: flex;
   flex-direction: column;
   padding: 10px 10px 10px;
-  gap: 8px;
-  align-items: stretch;
+  gap: 6px;
 }
 
 .tile-back-top {
@@ -389,34 +388,31 @@ header,
 /* QR box – responzivní, bez fixní výšky */
 
 .qr-box {
-  flex: 1;
-  border-radius: 8px;
-  background: #fdfdfd;
-  border: 1px dashed var(--border-soft);
+   flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 8px;
-  margin-top: 4px;
+  /* žádný border, žádné extra paddingy */
 }
 
 .qr-box img {
   display: block;
-  width: 100%;
-  height: auto;
   max-width: 100%;
   max-height: 100%;
+  width: auto;
+  height: auto;
   object-fit: contain;
 }
 
 /* tlačítka pod QR */
 
 .tile-back-actions {
-  display: flex;
+ display: flex;
   gap: 6px;
   justify-content: space-between;
   align-items: center;
   margin-top: 4px;
+  min-height: 44px;           /* rezerva pro dvě tlačítka */
 }
 
 /* =========================================
