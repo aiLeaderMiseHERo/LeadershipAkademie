@@ -357,7 +357,7 @@ header,
   transform: rotateY(180deg);
   display: flex;
   flex-direction: column;
-  padding: 14px 12px 12px;
+  padding: 10px 10px 10px;   /* méně vnitřního prostoru */
   gap: 10px;
   align-items: stretch;
 }
@@ -384,21 +384,21 @@ header,
 }
 
 .qr-box {
-  flex: 1;
-  min-height: 180px;          /* QR 180 px se vejde */
+ flex: 1;
+  min-height: 160px;          /* prostor pro větší QR, ale s rezervou na tlačítka */
   border-radius: 8px;
   background: #fdfdfd;
   border: 1px dashed var(--border-soft);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 4px;
+  padding: 8px;
 }
 
 .qr-box img {
   display: block;
-  height: 180px;              /* cílená výška */
   width: auto;
+  height: auto;
   max-width: 100%;
   object-fit: contain;
 }
@@ -407,10 +407,10 @@ header,
 
 .tile-back-actions {
   display: flex;
-  gap: 8px;
+  gap: 6px;
   justify-content: space-between;
   align-items: center;
-  margin-top: 6px;
+  margin-top: 4px;
 }
 .tile-back-actions .btn-primary,
 .tile-back-actions .btn-ghost {
@@ -422,13 +422,13 @@ header,
 .btn {
   border-radius: 999px;
   border: 1px solid transparent;
-  padding: 10px 18px;
-  font-size: 1.0rem;
+  padding: 6px 12px;         /* menší tlačítka */
+  font-size: 0.9rem;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
+  gap: 4px;
   background: transparent;
   color: var(--text-main);
   transition: background var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
