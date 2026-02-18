@@ -474,16 +474,21 @@ font-size: 0.8rem;
 /* =========================================
    MISSION PAGES (mise-X-Y)
 ========================================= */
-
-.mission-layout {
-  grid-template-columns: minmax(0, 1fr);  /* mobile: 1 sloupec */
-  gap: 12px;
-}
-
-.mission-card-left {
+.mission-page {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 16px;
+}
+
+/* jistota, že se nepoužije starý grid .layout / .mission-layout */
+.mission-layout {
+  display: block;
+  grid-template-columns: none;
+}
+
+.mission-card-left,
+.mission-card-right {
+  width: 100%;
 }
 
 .mission-name {
