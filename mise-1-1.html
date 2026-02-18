@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="app-shell">
+    <div class="app-shell">
     <header>
       <div class="brand">
         <div class="brand-logo"></div>
@@ -26,9 +26,9 @@
       </div>
     </header>
 
-    <div class="layout mission-layout">
-      <!-- BLOK 1: Zadání + video -->
-      <div class="card mission-card-left">
+    <!-- JEDEN SLOUPEC: nejdřív zadání, pak vyhodnocení -->
+    <main class="mission-page">
+      <section class="card mission-card-left">
         <h2 class="panel-title">Zadání mise</h2>
         <div class="mission-name">Mise 1.1: Rozpoznej úroveň kmenového vůdcovství a živel tvého učitele.</div>
         <div class="mission-goal">
@@ -46,10 +46,9 @@
             title="LiveAvatar Embed">
           </iframe>
         </div>
-      </div>
+      </section>
 
-      <!-- BLOK 2: Vyhodnocení – až pod videem -->
-      <div class="card mission-card-right">
+      <section class="card mission-card-right">
         <h2 class="panel-title">Vyhodnocení mise</h2>
         <div class="status-controls">
           <div class="status-buttons">
@@ -68,8 +67,8 @@
 
           <button class="btn btn-ghost" id="btnBack">Zpět na šachovnici</button>
         </div>
-      </div>
-    </div>
+      </section>
+    </main>
 
     <div class="footer">
       <span>Leadership Akademie – gamifikovaný trénink pro ředitele škol</span>
