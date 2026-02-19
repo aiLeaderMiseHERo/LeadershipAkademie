@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <title>Mise 1.1 – Leadership Akademie</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-shell">
+    <header>
+      <div class="brand">
+        <div class="brand-logo"></div>
+        <div class="brand-text">
+          <div class="brand-title">Leadership Akademie</div>
+          <div class="brand-subtitle">Mise 1.1 – Kmenové vůdcovství</div>
+        </div>
+      </div>
+      <div class="header-meta">
+        <div class="pill">
+          Souřadnice: 1.1
+        </div>
+        <div class="pill pill-cta">
+          Šachovnice misí · Ředitel – Leader
+        </div>
+      </div>
+    </header>
+
+    <!-- JEDEN SLOUPEC: nejdřív zadání, pak vyhodnocení -->
+    <main class="mission-page">
+      <section class="card mission-card-left">
+        <h2 class="panel-title">Zadání mise</h2>
+        <div class="mission-name">Mise 1.1: Rozpoznej úroveň kmenového vůdcovství a živel tvého učitele.</div>
+        <div class="mission-goal">
+          Vyslechni zadání od AI avatara, promysli konkrétního učitele z tvé školy a pojmenuj jeho aktuální úroveň
+          kmenového vůdcovství a dominující živel. Připrav si krátkou reflexi, kterou můžeš sdílet v diskusi nebo supervizi.
+        </div>
+        <div class="mission-meta">
+          Tip: Všímej si slovníku, energie a typických reakcí daného učitele. Jaký dopad má jeho styl na klima sborovny a výkonnost týmu?
+        </div>
+
+        <div class="video-container">
+          <iframe
+            src="https://embed.liveavatar.com/v1/c6c5d0c8-d501-4024-a10f-45095021e507"
+            allow="microphone"
+            title="LiveAvatar Embed">
+          </iframe>
+        </div>
+      </section>
+
+      <section class="card mission-card-right">
+        <h2 class="panel-title">Vyhodnocení mise</h2>
+        <div class="status-controls">
+          <div class="status-buttons">
+            <button class="btn btn-primary" id="btnDone">Splnil jsem</button>
+            <button class="btn btn-ghost" id="btnFailed">Nesplnil jsem</button>
+          </div>
+          <p class="status-info">
+            Po označení výsledku se stav mise uloží v tomto prohlížeči. Po návratu na šachovnici bude pole 1.1 zvýrazněno
+            zeleně (splněno) nebo červeně (nesplněno).
+          </p>
+
+          <div class="status-label">
+            <span class="status-dot"></span>
+            <span id="statusText">Mise zatím není označena.</span>
+          </div>
+
+          <button class="btn btn-ghost" id="btnBack">Zpět na šachovnici</button>
+        </div>
+      </section>
+    </main>
+
+    <div class="footer">
+      <span>Leadership Akademie – gamifikovaný trénink pro ředitele škol</span>
+      <span>Mise 1.1 · Kmenové vůdcovství & živly</span>
+    </div>
+  </div>
+
+  <script>
+    const x = 1;
+    const y = 1;
+    const STORAGE_KEY = 'leadership_akademie_mise_' + x + '_' + y;
+
+    const btnDone = document.getElementById('btnDone');
+    const btnFailed = document.getElementById('btnFailed');
+    const btnBack = document.getElementById('btnBack');
+    const statusText = document.getElementById('statusText');
+
+    function updateStatusLabel() {
+      const value = localStorage.getItem(STORAGE_KEY);
+      if (value === 'done') {
+        statusText.textContent = 'Mise je označena jako splněná.';
+      } else if (value === 'failed') {
+        statusText.textContent = 'Mise je označena jako nesplněná.';
+      } else {
+        statusText.textContent = 'Mise zatím není označena.';
+      }
+    }
+
+    btnDone.addEventListener('click', () => {
+      localStorage.setItem(STORAGE_KEY, 'done');
+      updateStatusLabel();
+    });
+
+    btnFailed.addEventListener('click', () => {
+      localStorage.setItem(STORAGE_KEY, 'failed');
+      updateStatusLabel();
+    });
+
+    btnBack.addEventListener('click', () => {
+      window.location.href = 'index.html';
+    });
+
+    document.addEventListener('DOMContentLoaded', updateStatusLabel);
+  </script>
+</body>
+</html>
