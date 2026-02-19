@@ -13,3 +13,113 @@
     </div>
   </section>
 </main>
+
+
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <title>Mise 4.1 – Leadership Akademie</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-shell">
+    <header>
+      <div class="brand">
+        <div class="brand-logo"></div>
+        <div class="brand-text">
+          <div class="brand-title">Leadership Akademie</div>
+          <div class="brand-subtitle">Mise 4.1 – připravujeme</div>
+        </div>
+      </div>
+      <div class="header-meta">
+        <div class="pill">
+          Souřadnice: 4.1
+        </div>
+        <div class="pill pill-cta">
+          Šachovnice misí · Ředitel – Leader
+        </div>
+      </div>
+    </header>
+
+    <!-- JEDEN SLOUPEC: nejdřív zadání, pak vyhodnocení -->
+    <main class="mission-page">
+      <section class="card mission-card-left">
+        <h2 class="panel-title">Zadání mise</h2>
+        <div class="mission-name">Mise 4.1: Připravujeme </div>
+        <div class="mission-goal">
+          Na této misi aktuálně pracujeme a její obsah bude doplněn později. 
+      
+        </div>
+        <div class="mission-meta">
+          Děkujeme za pochopení a trpělivost. Brzy zde najdeš plnohodnotné zadání, video a vyhodnocení mise, aby tvá cesta ředitele–Leadera mohla pokračovat dál.
+        </div>
+
+      <section class="card mission-card-right">
+        <h2 class="panel-title">Vyhodnocení mise</h2>
+        <div class="status-controls">
+          <div class="status-buttons">
+            <button class="btn btn-primary" id="btnDone">Splnil jsem</button>
+            <button class="btn btn-ghost" id="btnFailed">Nesplnil jsem</button>
+          </div>
+          <p class="status-info">
+            Po označení výsledku se stav mise uloží v tomto prohlížeči. Po návratu na šachovnici bude pole 4.1 zvýrazněno
+            zeleně (splněno) nebo červeně (nesplněno).
+          </p>
+
+          <div class="status-label">
+            <span class="status-dot"></span>
+            <span id="statusText">Mise zatím není označena.</span>
+          </div>
+
+          <button class="btn btn-ghost" id="btnBack">Zpět na šachovnici</button>
+        </div>
+      </section>
+    </main>
+
+    <div class="footer">
+      <span>Leadership Akademie – gamifikovaný trénink pro ředitele škol</span>
+      <span>Mise 4.1 · Kmenové vůdcovství & živly</span>
+    </div>
+  </div>
+
+  <script>
+    const x = 4;
+    const y = 1;
+    const STORAGE_KEY = 'leadership_akademie_mise_' + x + '_' + y;
+
+    const btnDone = document.getElementById('btnDone');
+    const btnFailed = document.getElementById('btnFailed');
+    const btnBack = document.getElementById('btnBack');
+    const statusText = document.getElementById('statusText');
+
+    function updateStatusLabel() {
+      const value = localStorage.getItem(STORAGE_KEY);
+      if (value === 'done') {
+        statusText.textContent = 'Mise je označena jako splněná.';
+      } else if (value === 'failed') {
+        statusText.textContent = 'Mise je označena jako nesplněná.';
+      } else {
+        statusText.textContent = 'Mise zatím není označena.';
+      }
+    }
+
+    btnDone.addEventListener('click', () => {
+      localStorage.setItem(STORAGE_KEY, 'done');
+      updateStatusLabel();
+    });
+
+    btnFailed.addEventListener('click', () => {
+      localStorage.setItem(STORAGE_KEY, 'failed');
+      updateStatusLabel();
+    });
+
+    btnBack.addEventListener('click', () => {
+      window.location.href = 'index.html';
+    });
+
+    document.addEventListener('DOMContentLoaded', updateStatusLabel);
+  </script>
+</body>
+</html>
