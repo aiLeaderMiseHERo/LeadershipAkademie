@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="app-shell">
+  <div class="app-shell">
     <header>
       <div class="brand">
         <div class="brand-logo"></div>
@@ -26,8 +26,8 @@
       </div>
     </header>
 
-    <!-- JEDEN SLOUPEC: nejdřív zadání, pak vyhodnocení -->
     <main class="mission-page">
+      <!-- ZADÁNÍ MISE -->
       <section class="card mission-card-left">
         <h2 class="panel-title">Zadání mise</h2>
         <div class="mission-name">Mise 1.1: Rozpoznej úroveň kmenového vůdcovství a živel tvého učitele.</div>
@@ -48,12 +48,14 @@
         </div>
       </section>
 
+      <!-- VYHODNOCENÍ MISE -->
       <section class="card mission-card-right">
         <h2 class="panel-title">Vyhodnocení mise</h2>
         <div class="status-controls">
           <div class="status-buttons">
-            <button class="btn btn-primary" id="btnDone">Splnil jsem</button>
-            <button class="btn btn-ghost" id="btnFailed">Nesplnil jsem</button>
+            <!-- NEUTRÁLNÍ BTN BEZ ORANŽOVÉHO POZADÍ -->
+            <button class="btn status-btn" id="btnDone">Splnil jsem</button>
+            <button class="btn status-btn" id="btnFailed">Nesplnil jsem</button>
           </div>
           <p class="status-info">
             Po označení výsledku se stav mise uloží v tomto prohlížeči. Po návratu na šachovnici bude pole 1.1 zvýrazněno
@@ -81,49 +83,54 @@
     const y = 1;
     const STORAGE_KEY = 'leadership_akademie_mise_' + x + '_' + y;
 
-  const btnDone = document.getElementById('btnDone');
-  const btnFailed = document.getElementById('btnFailed');
-  const statusText = document.getElementById('statusText');
-  const statusDot = document.querySelector('.status-dot');
+    const btnDone = document.getElementById('btnDone');
+    const btnFailed = document.getElementById('btnFailed');
+    const btnBack = document.getElementById('btnBack');
+    const statusText = document.getElementById('statusText');
+    const statusDot = document.querySelector('.status-dot');
 
-  function applyVisualState(value) {
-    // reset tříd
-    btnDone.classList.remove('btn-done-active');
-    btnFailed.classList.remove('btn-failed-active');
+    function applyVisualState(value) {
+      // reset tříd
+      btnDone.classList.remove('btn-done-active');
+      btnFailed.classList.remove('btn-failed-active');
 
-    if (value === 'done') {
-      btnDone.classList.add('btn-done-active');
-      statusDot.style.backgroundColor = '#20c997';      // zelený semafor
-      statusDot.style.boxShadow = '0 0 0 4px rgba(32,201,151,0.25)';
-      statusText.textContent = 'Mise je označena jako splněná.';
-    } else if (value === 'failed') {
-      btnFailed.classList.add('btn-failed-active');
-      statusDot.style.backgroundColor = '#ff6a00';      // oranžový semafor
-      statusDot.style.boxShadow = '0 0 0 4px rgba(255,106,0,0.25)';
-      statusText.textContent = 'Mise je označena jako nesplněná.';
-    } else {
-      statusDot.style.backgroundColor = 'var(--accent-strong)';
-      statusDot.style.boxShadow = '0 0 0 4px var(--accent-soft)';
-      statusText.textContent = 'Mise zatím není označena.';
+      if (value === 'done') {
+        btnDone.classList.add('btn-done-active');
+        statusDot.style.backgroundColor = '#20c997';      // zelený semafor
+        statusDot.style.boxShadow = '0 0 0 4px rgba(32,201,151,0.25)';
+        statusText.textContent = 'Mise je označena jako splněná.';
+      } else if (value === 'failed') {
+        btnFailed.classList.add('btn-failed-active');
+        statusDot.style.backgroundColor = '#ff6a00';      // oranžový semafor
+        statusDot.style.boxShadow = '0 0 0 4px rgba(255,106,0,0.25)';
+        statusText.textContent = 'Mise je označena jako nesplněná.';
+      } else {
+        statusDot.style.backgroundColor = 'var(--accent-strong)';
+        statusDot.style.boxShadow = '0 0 0 4px var(--accent-soft)';
+        statusText.textContent = 'Mise zatím není označena.';
+      }
     }
-  }
 
-  function updateStatusLabel() {
-    const value = localStorage.getItem(STORAGE_KEY);
-    applyVisualState(value);
-  }
+    function updateStatusLabel() {
+      const value = localStorage.getItem(STORAGE_KEY);
+      applyVisualState(value);
+    }
 
-  btnDone.addEventListener('click', () => {
-    localStorage.setItem(STORAGE_KEY, 'done');
-    applyVisualState('done');
-  });
+    btnDone.addEventListener('click', () => {
+      localStorage.setItem(STORAGE_KEY, 'done');
+      applyVisualState('done');
+    });
 
-  btnFailed.addEventListener('click', () => {
-    localStorage.setItem(STORAGE_KEY, 'failed');
-    applyVisualState('failed');
-  });
+    btnFailed.addEventListener('click', () => {
+      localStorage.setItem(STORAGE_KEY, 'failed');
+      applyVisualState('failed');
+    });
 
-  document.addEventListener('DOMContentLoaded', updateStatusLabel); 
+    btnBack.addEventListener('click', () => {
+      window.location.href = 'index.html';
+    });
+
+    document.addEventListener('DOMContentLoaded', updateStatusLabel);
   </script>
 </body>
 </html>
