@@ -81,37 +81,49 @@
     const y = 1;
     const STORAGE_KEY = 'leadership_akademie_mise_' + x + '_' + y;
 
-    const btnDone = document.getElementById('btnDone');
-    const btnFailed = document.getElementById('btnFailed');
-    const btnBack = document.getElementById('btnBack');
-    const statusText = document.getElementById('statusText');
+  const btnDone = document.getElementById('btnDone');
+  const btnFailed = document.getElementById('btnFailed');
+  const statusText = document.getElementById('statusText');
+  const statusDot = document.querySelector('.status-dot');
 
-    function updateStatusLabel() {
-      const value = localStorage.getItem(STORAGE_KEY);
-      if (value === 'done') {
-        statusText.textContent = 'Mise je označena jako splněná.';
-      } else if (value === 'failed') {
-        statusText.textContent = 'Mise je označena jako nesplněná.';
-      } else {
-        statusText.textContent = 'Mise zatím není označena.';
-      }
+  function applyVisualState(value) {
+    // reset tříd
+    btnDone.classList.remove('btn-done-active');
+    btnFailed.classList.remove('btn-failed-active');
+
+    if (value === 'done') {
+      btnDone.classList.add('btn-done-active');
+      statusDot.style.backgroundColor = '#20c997';      // zelený semafor
+      statusDot.style.boxShadow = '0 0 0 4px rgba(32,201,151,0.25)';
+      statusText.textContent = 'Mise je označena jako splněná.';
+    } else if (value === 'failed') {
+      btnFailed.classList.add('btn-failed-active');
+      statusDot.style.backgroundColor = '#ff6a00';      // oranžový semafor
+      statusDot.style.boxShadow = '0 0 0 4px rgba(255,106,0,0.25)';
+      statusText.textContent = 'Mise je označena jako nesplněná.';
+    } else {
+      statusDot.style.backgroundColor = 'var(--accent-strong)';
+      statusDot.style.boxShadow = '0 0 0 4px var(--accent-soft)';
+      statusText.textContent = 'Mise zatím není označena.';
     }
+  }
 
-    btnDone.addEventListener('click', () => {
-      localStorage.setItem(STORAGE_KEY, 'done');
-      updateStatusLabel();
-    });
+  function updateStatusLabel() {
+    const value = localStorage.getItem(STORAGE_KEY);
+    applyVisualState(value);
+  }
 
-    btnFailed.addEventListener('click', () => {
-      localStorage.setItem(STORAGE_KEY, 'failed');
-      updateStatusLabel();
-    });
+  btnDone.addEventListener('click', () => {
+    localStorage.setItem(STORAGE_KEY, 'done');
+    applyVisualState('done');
+  });
 
-    btnBack.addEventListener('click', () => {
-      window.location.href = 'index.html';
-    });
+  btnFailed.addEventListener('click', () => {
+    localStorage.setItem(STORAGE_KEY, 'failed');
+    applyVisualState('failed');
+  });
 
-    document.addEventListener('DOMContentLoaded', updateStatusLabel);
+  document.addEventListener('DOMContentLoaded', updateStatusLabel); 
   </script>
 </body>
 </html>
