@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="cs">
 <head>
@@ -28,7 +27,7 @@
     </header>
 
     <main class="mission-page">
-      <!-- ZADÁNÍ MISE 1.2 – stejné jako 1.1 -->
+      <!-- ZADÁNÍ MISE -->
       <section class="card mission-card-left">
         <h2 class="panel-title">Zadání mise</h2>
         <div class="mission-name">Mise 1.2: Rozpoznej úroveň kmenového vůdcovství a živel tvého učitele.</div>
@@ -37,23 +36,24 @@
           kmenového vůdcovství a dominující živel. Připrav si krátkou reflexi, kterou můžeš sdílet v diskusi s ostatními.
         </div>
         <div class="mission-meta">
-          TTip: Všímej si slovníku, energie a typických reakcí daného učitele. Jaký dopad má jeho a tvůj styl na vaši spolupráci?
+          Tip: Všímej si slovníku, energie a typických reakcí daného učitele. Jaký dopad má jeho a tvůj styl na spolupráci?
         </div>
 
         <div class="video-container">
           <iframe
-            src="https://embed.liveavatar.com/v1/c7c52976-1587-4784-a967-5d74ab4d7ef3"
+            src="https://embed.liveavatar.com/v1/c6c5d0c8-d501-4024-a10f-45095021e507"
             allow="microphone"
             title="LiveAvatar Embed">
           </iframe>
         </div>
       </section>
 
-      <!-- VYHODNOCENÍ MISE 1.2 -->
+      <!-- VYHODNOCENÍ MISE -->
       <section class="card mission-card-right">
         <h2 class="panel-title">Vyhodnocení mise</h2>
         <div class="status-controls">
           <div class="status-buttons">
+            <!-- NEUTRÁLNÍ BTN BEZ ORANŽOVÉHO POZADÍ -->
             <button class="btn status-btn" id="btnDone">Splnil jsem</button>
             <button class="btn status-btn" id="btnFailed">Nesplnil jsem</button>
           </div>
@@ -78,7 +78,7 @@
     </div>
   </div>
 
-  <script><script>
+  <script>
     const x = 1;
     const y = 2;
     const STORAGE_KEY = 'leadership_akademie_mise_' + x + '_' + y;
@@ -90,10 +90,11 @@
     const statusDot = document.querySelector('.status-dot');
 
     function applyVisualState(value) {
+      // reset tříd
       btnDone.classList.remove('btn-done-active');
       btnFailed.classList.remove('btn-failed-active');
 
- if (value === 'done') {
+      if (value === 'done') {
         btnDone.classList.add('btn-done-active');
         statusDot.style.backgroundColor = '#20c997';      // zelený semafor
         statusDot.style.boxShadow = '0 0 0 4px rgba(32,201,151,0.25)';
