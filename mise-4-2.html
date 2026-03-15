@@ -13,7 +13,7 @@
         <div class="brand-logo"></div>
         <div class="brand-text">
           <div class="brand-title">Leadership Akademie</div>
-          <div class="brand-subtitle">Mise 4.2 – připravujeme</div>
+          <div class="brand-subtitle">Mise 4.2 – Kmenové vůdcovství</div>
         </div>
       </div>
       <div class="header-meta">
@@ -30,21 +30,31 @@
     <main class="mission-page">
       <section class="card mission-card-left">
         <h2 class="panel-title">Zadání mise</h2>
-        <div class="mission-name">Mise 4.2: Připravujeme </div>
+        <div class="mission-name">Mise 4.2: Deleguj na učitele. </div>
         <div class="mission-goal">
-          Na této misi aktuálně pracujeme a její obsah bude doplněn později. 
-      
+           Připrav se, že budeš delegovat na učitele, kterého sis pozval, protože je schopný. Po skončení rozhovoru si připrav krátkou reflexi, kterou můžeš sdílet.
         </div>
         <div class="mission-meta">
-          Děkujeme za pochopení a trpělivost. Brzy zde najdeš plnohodnotné zadání, video a vyhodnocení mise, aby tvá cesta ředitele–Leadera mohla pokračovat dál.
+          Tip: Připomeň si, jak správně delegovat v rámci situačního vedení a připrav si téma ze své praxe, které je k tomu vhodné.
         </div>
 
+        <div class="video-container">
+          <iframe
+             src="https://embed.liveavatar.com/v1/53b7ce77-793d-4f4a-8a99-b9210d310c2b"
+            allow="microphone"
+            title="LiveAvatar Embed">
+          </iframe>
+        </div>
+      </section>
+
+      <!-- VYHODNOCENÍ MISE -->
       <section class="card mission-card-right">
         <h2 class="panel-title">Vyhodnocení mise</h2>
         <div class="status-controls">
           <div class="status-buttons">
-            <button class="btn btn-primary" id="btnDone">Splnil jsem</button>
-            <button class="btn btn-ghost" id="btnFailed">Nesplnil jsem</button>
+            <!-- NEUTRÁLNÍ BTN BEZ ORANŽOVÉHO POZADÍ -->
+            <button class="btn status-btn" id="btnDone">Splnil jsem</button>
+            <button class="btn status-btn" id="btnFailed">Nesplnil jsem</button>
           </div>
           <p class="status-info">
             Po označení výsledku se stav mise uloží v tomto prohlížeči. Po návratu na šachovnici bude pole 4.2 zvýrazněno
@@ -76,26 +86,43 @@
     const btnFailed = document.getElementById('btnFailed');
     const btnBack = document.getElementById('btnBack');
     const statusText = document.getElementById('statusText');
+    const statusDot = document.querySelector('.status-dot');
 
-    function updateStatusLabel() {
-      const value = localStorage.getItem(STORAGE_KEY);
+    function applyVisualState(value) {
+      // reset tříd
+      btnDone.classList.remove('btn-done-active');
+      btnFailed.classList.remove('btn-failed-active');
+
       if (value === 'done') {
+        btnDone.classList.add('btn-done-active');
+        statusDot.style.backgroundColor = '#20c997';      // zelený semafor
+        statusDot.style.boxShadow = '0 0 0 4px rgba(32,201,151,0.25)';
         statusText.textContent = 'Mise je označena jako splněná.';
       } else if (value === 'failed') {
+        btnFailed.classList.add('btn-failed-active');
+        statusDot.style.backgroundColor = '#ff6a00';      // oranžový semafor
+        statusDot.style.boxShadow = '0 0 0 4px rgba(255,106,0,0.25)';
         statusText.textContent = 'Mise je označena jako nesplněná.';
       } else {
+        statusDot.style.backgroundColor = 'var(--accent-strong)';
+        statusDot.style.boxShadow = '0 0 0 4px var(--accent-soft)';
         statusText.textContent = 'Mise zatím není označena.';
       }
     }
 
+    function updateStatusLabel() {
+      const value = localStorage.getItem(STORAGE_KEY);
+      applyVisualState(value);
+    }
+
     btnDone.addEventListener('click', () => {
       localStorage.setItem(STORAGE_KEY, 'done');
-      updateStatusLabel();
+      applyVisualState('done');
     });
 
     btnFailed.addEventListener('click', () => {
       localStorage.setItem(STORAGE_KEY, 'failed');
-      updateStatusLabel();
+      applyVisualState('failed');
     });
 
     btnBack.addEventListener('click', () => {
@@ -106,4 +133,3 @@
   </script>
 </body>
 </html>
-
