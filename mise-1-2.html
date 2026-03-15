@@ -67,7 +67,7 @@
             <span id="statusText">Mise zatím není označena.</span>
           </div>
 
-          <button class="btn status-btn" id="btnBack">Zpět na šachovnici</button>
+          <button class="btn btn-ghost" id="btnBack">Zpět na šachovnici</button>
         </div>
       </section>
     </main>
@@ -93,14 +93,14 @@
       btnDone.classList.remove('btn-done-active');
       btnFailed.classList.remove('btn-failed-active');
 
-      if (value === 'done') {
+ if (value === 'done') {
         btnDone.classList.add('btn-done-active');
-        statusDot.style.backgroundColor = '#20c997';
+        statusDot.style.backgroundColor = '#20c997';      // zelený semafor
         statusDot.style.boxShadow = '0 0 0 4px rgba(32,201,151,0.25)';
         statusText.textContent = 'Mise je označena jako splněná.';
       } else if (value === 'failed') {
         btnFailed.classList.add('btn-failed-active');
-        statusDot.style.backgroundColor = '#ff6a00';
+        statusDot.style.backgroundColor = '#ff6a00';      // oranžový semafor
         statusDot.style.boxShadow = '0 0 0 4px rgba(255,106,0,0.25)';
         statusText.textContent = 'Mise je označena jako nesplněná.';
       } else {
