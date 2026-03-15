@@ -564,6 +564,28 @@ font-size: 0.8rem;
   box-shadow: 0 0 0 4px var(--accent-soft);
 }
 
+/* základní tlačítko mise */
+.status-buttons .btn {
+  background: #ffffff;
+  color: var(--text-main);
+  border-radius: 999px;
+  border: 2px solid var(--border-soft);
+}
+
+/* aktivní stav – splnil jsem = zelený rámeček */
+.btn-done-active {
+  border-color: #20c997;          /* zelená */
+  color: #20c997;
+}
+
+/* aktivní stav – nesplnil jsem = oranžový rámeček */
+.btn-failed-active {
+  border-color: #ff6a00;          /* oranžová */
+  color: #ff6a00;
+}
+
+
+
 /* footer */
 
 .footer {
