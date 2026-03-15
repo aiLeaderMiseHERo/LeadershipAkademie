@@ -54,8 +54,8 @@
         <h2 class="panel-title">Vyhodnocení mise</h2>
         <div class="status-controls">
           <div class="status-buttons">
-            <button class="btn btn-primary" id="btnDone">Splnil jsem</button>
-            <button class="btn btn-ghost" id="btnFailed">Nesplnil jsem</button>
+            <button class="btn status-btn" id="btnDone">Splnil jsem</button>
+            <button class="btn status-btn" id="btnFailed">Nesplnil jsem</button>
           </div>
           <p class="status-info">
             Po označení výsledku se stav mise uloží v tomto prohlížeči. Po návratu na šachovnici bude pole 1.2 zvýrazněno
@@ -67,7 +67,7 @@
             <span id="statusText">Mise zatím není označena.</span>
           </div>
 
-          <button class="btn btn-ghost" id="btnBack">Zpět na šachovnici</button>
+          <button class="btn status-btn" id="btnBack">Zpět na šachovnici</button>
         </div>
       </section>
     </main>
@@ -78,7 +78,7 @@
     </div>
   </div>
 
-  <script>
+  <script><script>
     const x = 1;
     const y = 2;
     const STORAGE_KEY = 'leadership_akademie_mise_' + x + '_' + y;
@@ -87,26 +87,42 @@
     const btnFailed = document.getElementById('btnFailed');
     const btnBack = document.getElementById('btnBack');
     const statusText = document.getElementById('statusText');
+    const statusDot = document.querySelector('.status-dot');
 
-    function updateStatusLabel() {
-      const value = localStorage.getItem(STORAGE_KEY);
+    function applyVisualState(value) {
+      btnDone.classList.remove('btn-done-active');
+      btnFailed.classList.remove('btn-failed-active');
+
       if (value === 'done') {
+        btnDone.classList.add('btn-done-active');
+        statusDot.style.backgroundColor = '#20c997';
+        statusDot.style.boxShadow = '0 0 0 4px rgba(32,201,151,0.25)';
         statusText.textContent = 'Mise je označena jako splněná.';
       } else if (value === 'failed') {
+        btnFailed.classList.add('btn-failed-active');
+        statusDot.style.backgroundColor = '#ff6a00';
+        statusDot.style.boxShadow = '0 0 0 4px rgba(255,106,0,0.25)';
         statusText.textContent = 'Mise je označena jako nesplněná.';
       } else {
+        statusDot.style.backgroundColor = 'var(--accent-strong)';
+        statusDot.style.boxShadow = '0 0 0 4px var(--accent-soft)';
         statusText.textContent = 'Mise zatím není označena.';
       }
     }
 
+    function updateStatusLabel() {
+      const value = localStorage.getItem(STORAGE_KEY);
+      applyVisualState(value);
+    }
+
     btnDone.addEventListener('click', () => {
       localStorage.setItem(STORAGE_KEY, 'done');
-      updateStatusLabel();
+      applyVisualState('done');
     });
 
     btnFailed.addEventListener('click', () => {
       localStorage.setItem(STORAGE_KEY, 'failed');
-      updateStatusLabel();
+      applyVisualState('failed');
     });
 
     btnBack.addEventListener('click', () => {
