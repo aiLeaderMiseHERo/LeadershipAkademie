@@ -570,18 +570,21 @@ font-size: 0.8rem;
   color: var(--text-main);
   border-radius: 999px;
   border: 2px solid var(--border-soft);
+     transition: border-color 0.2s ease, color 0.2s ease;
 }
 
 /* aktivní stav – splnil jsem = zelený rámeček */
-.btn-done-active {
-  border-color: #20c997;          /* zelená */
-  color: #20c997;
+.status-buttons .btn.btn-done-active {
+  border-color: #20c997 !important;          /* zelená */
+  color: #20c997 !important;
+     background: rgba(32, 201, 151, 0.06) !important;
 }
 
 /* aktivní stav – nesplnil jsem = oranžový rámeček */
-.btn-failed-active {
-  border-color: #ff6a00;          /* oranžová */
-  color: #ff6a00;
+.status-buttons .btn.btn-failed-active {
+  border-color: #ff6a00 !important;          /* oranžová */
+  color: #ff6a00 !important;
+     background: rgba(255, 106, 0, 0.06) !important;
 }
 
 
