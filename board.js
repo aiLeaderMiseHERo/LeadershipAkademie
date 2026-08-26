@@ -50,19 +50,17 @@ function createTile(mission) {
   coordSub.className = 'coord-sub';
   coordSub.textContent = 'Klikni pro odhalení';
 
-  const statusOverlay = document.createElement('span');
-  statusOverlay.className = 'tile-status';
-
+  /* Stav se kreslí rámečkem a pozadím přímo na přední straně dlaždice, ne
+     přes vloženou vrstvu — méně elementů a barva se vykreslí spolehlivě. */
   const statusIcon = document.createElement('span');
   statusIcon.className = 'tile-status-icon';
   statusIcon.setAttribute('aria-hidden', 'true');
-  statusOverlay.appendChild(statusIcon);
 
-  /* Stav se kreslí barvou rámečku, takže pro čtečku obrazovky musí být i textem. */
+  /* Stav je vidět barvou, takže pro čtečku obrazovky musí být i textem. */
   const srStatus = document.createElement('span');
   srStatus.className = 'sr-only';
 
-  front.append(coordLabel, coordSub, statusOverlay, srStatus);
+  front.append(coordLabel, coordSub, statusIcon, srStatus);
 
   /* --- zadní strana --- */
 
@@ -125,7 +123,7 @@ function createTile(mission) {
     back.inert = !flipped;
   }
 
-  const api = { wrapper, statusOverlay, srStatus, statusIcon, mission, setFlipped };
+  const api = { wrapper, front, srStatus, statusIcon, mission, setFlipped };
 
   front.addEventListener('click', () => {
     /* Otevřená je vždy jen jedna dlaždice, aby byl na obrazovce právě jeden
@@ -172,10 +170,10 @@ function renderBoard() {
 }
 
 function refreshStatuses() {
-  tiles.forEach(({ mission, statusOverlay, statusIcon, srStatus }) => {
+  tiles.forEach(({ mission, front, statusIcon, srStatus }) => {
     const status = getMissionStatus(mission.x, mission.y);
-    statusOverlay.classList.toggle('done', status === 'done');
-    statusOverlay.classList.toggle('failed', status === 'failed');
+    front.classList.toggle('done', status === 'done');
+    front.classList.toggle('failed', status === 'failed');
     statusIcon.textContent = STATUS_ICON[status] || '';
     srStatus.textContent = 'Stav: ' + statusText(status);
   });

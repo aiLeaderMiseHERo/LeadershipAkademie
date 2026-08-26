@@ -359,13 +359,15 @@ header {
   transform: rotateY(180deg);
 }
 
+/* Rámeček stejně jako u karet v portálu; velké bílé panely ho naopak nemají,
+   protože obsahové karty na jakpoint.cz jsou bez rámečku. */
 .tile-face {
   position: absolute;
   inset: 0;
   display: flex;
   flex-direction: column;
   border-radius: var(--radius-card);
-  border: 0;
+  border: 2px solid var(--border);
   background: var(--bg-surface);
   box-shadow: var(--shadow-card);
   backface-visibility: hidden;
@@ -374,7 +376,12 @@ header {
 
 /* --- přední strana --- */
 
+/* Přední strana je <button>. Bez appearance:none si Chrome u form controlu
+   drží nativní barvu rámečku a samotný border-color ignoruje — stavový
+   zelený/červený rámeček by se nevykreslil. */
 .tile-front {
+  appearance: none;
+  -webkit-appearance: none;
   justify-content: center;
   align-items: center;
   gap: 8px;
@@ -383,12 +390,14 @@ header {
   color: inherit;
   text-align: center;
   cursor: pointer;
-  transition: transform var(--transition), box-shadow var(--transition);
+  transition: transform var(--transition), box-shadow var(--transition),
+    border-color var(--transition), background var(--transition);
 }
 
 .tile-front:hover,
 .tile-front:focus-visible {
   transform: translateY(-4px);
+  border: 2px solid var(--brand-strong);
   box-shadow: var(--shadow-raised);
 }
 
@@ -406,23 +415,25 @@ header {
   color: var(--text-soft);
 }
 
-.tile-status {
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  border: 3px solid transparent;
-  pointer-events: none;
-  transition: border-color var(--transition), background var(--transition);
-}
-
-.tile-status.done {
-  border-color: var(--success);
+/* Stav mise nese rámeček a pozadí samotné dlaždice. */
+.tile-front.done {
+  border: 2px solid var(--success);
   background: var(--success-soft);
 }
 
-.tile-status.failed {
-  border-color: var(--danger);
+.tile-front.done:hover,
+.tile-front.done:focus-visible {
+  border: 2px solid var(--success);
+}
+
+.tile-front.failed {
+  border: 2px solid var(--danger);
   background: var(--danger-soft);
+}
+
+.tile-front.failed:hover,
+.tile-front.failed:focus-visible {
+  border: 2px solid var(--danger);
 }
 
 .tile-status-icon {
@@ -440,16 +451,16 @@ header {
   color: #ffffff;
 }
 
-.tile-status.done .tile-status-icon,
-.tile-status.failed .tile-status-icon {
+.tile-front.done .tile-status-icon,
+.tile-front.failed .tile-status-icon {
   display: flex;
 }
 
-.tile-status.done .tile-status-icon {
+.tile-front.done .tile-status-icon {
   background: var(--success);
 }
 
-.tile-status.failed .tile-status-icon {
+.tile-front.failed .tile-status-icon {
   background: var(--danger);
 }
 
