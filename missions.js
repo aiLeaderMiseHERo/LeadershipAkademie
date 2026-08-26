@@ -54,7 +54,7 @@ const MISSIONS = [
   },
   {
     id: '2.1', x: 2, y: 1,
-    title: "Zadej požadavek na učitele.",
+    title: "Zadej požadavek na učitele Přikazováním.",
     theme: "Situační vedení – přikazování a instruování",
     goal: "Připrav si konkrétní požadavek na učitele ze své praxe. Přikaž jej co nejkonkrétněji učiteli, jako by byl z tvé školy. Připrav si krátkou reflexi, kterou můžeš sdílet.",
     tip: "Připomeň si, jak správně používat přikazování v rámci situačního vedení a připrav si požadavek, který je k tomu vhodný.",
@@ -62,7 +62,7 @@ const MISSIONS = [
   },
   {
     id: '2.2', x: 2, y: 2,
-    title: "Zadej požadavek na učitele.",
+    title: "Zadej požadavek na učitele Instruováním.",
     theme: "Situační vedení – přikazování a instruování",
     goal: "Připrav si konkrétní požadavek na učitele ze své praxe. Instruuj učitele tímto konkrétním požadavkem, jako by byl z tvé školy. Připrav si krátkou reflexi, kterou můžeš sdílet.",
     tip: "Připomeň si, jak správně používat instruování v rámci situačního vedení a připrav si požadavek, který je k tomu vhodný.",
@@ -70,7 +70,7 @@ const MISSIONS = [
   },
   {
     id: '2.3', x: 2, y: 3,
-    title: "Zadej požadavek na učitele.",
+    title: "Zadej požadavek na učitele Přikazováním.",
     theme: "Situační vedení – přikazování a instruování",
     goal: "Připrav si konkrétní požadavek na učitele ze své praxe. Přikaž jej co nejkonkrétněji učiteli, jako by byl z tvé školy. Připrav si krátkou reflexi, kterou můžeš sdílet.",
     tip: "Připomeň si, jak správně používat přikazování v rámci situačního vedení a připrav si požadavek, který je k tomu vhodný.",
@@ -78,7 +78,7 @@ const MISSIONS = [
   },
   {
     id: '2.4', x: 2, y: 4,
-    title: "Zadej požadavek na učitele.",
+    title: "Zadej požadavek na učitele Instruováním.",
     theme: "Situační vedení – přikazování a instruování",
     goal: "Připrav si konkrétní požadavek na učitele ze své praxe. Instruuj učitele tímto konkrétním požadavkem, jako by byl z tvé školy. Připrav si krátkou reflexi, kterou můžeš sdílet v diskusi nebo supervizi.",
     tip: "Připomeň si, jak správně používat instruování v rámci situačního vedení a připrav si požadavek, který je k tomu vhodný.",
@@ -118,7 +118,7 @@ const MISSIONS = [
   },
   {
     id: '4.1', x: 4, y: 1,
-    title: "Posouvej učitele.",
+    title: "Posouvej učitele na úroveň 4.",
     theme: "Posouvání učitele a školy",
     goal: "Vyzkoušej jak posunout učitele z úrovně 3 na 4. Po skončení rozhovoru si připrav krátkou reflexi, kterou můžeš sdílet.",
     tip: "Připomeň si, co pomáhá posouvat z úrovně 3 na vyšší úroveň v rámci kmenového vůdcovství.",
@@ -143,7 +143,7 @@ const MISSIONS = [
   },
   {
     id: '4.4', x: 4, y: 4,
-    title: "Posouvej učitele.",
+    title: "Posouvej učitele na úroveň 3.",
     theme: "Posouvání učitele a školy",
     goal: "Vyzkoušej jak posunout učitele z úrovně 2 na 3. Po skončení rozhovoru si připrav krátkou reflexi, kterou můžeš sdílet.",
     tip: "Připomeň si, co pomáhá posouvat z úrovně 2 na vyšší úroveň v rámci kmenového vůdcovství.",
