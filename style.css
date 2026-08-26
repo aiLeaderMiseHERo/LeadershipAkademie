@@ -599,15 +599,6 @@ header {
   gap: 16px;
 }
 
-/* Karta je široká jako stránka, ale text se čte líp v omezené míře řádku.
-   Videa a QR se to netýká, ta zůstávají na plnou šířku. */
-.mission-name,
-.mission-goal,
-.mission-tip,
-.status-info {
-  max-width: 78ch;
-}
-
 .mission-name {
   font-size: 1.25rem;
   font-weight: 700;
