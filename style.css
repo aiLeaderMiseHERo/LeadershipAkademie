@@ -1,95 +1,154 @@
-/* =========================================
-   ZÁKLAD – MOBILE FIRST
-========================================= */
+/* =========================================================================
+   Leadership Akademie — modul avatara pro portál JAKpoint
+   -------------------------------------------------------------------------
+   Vizuální řeč je odečtená z jakpoint.cz:
+     - béžová stránka (#EFEAE5), obsah v bílých kartách radius 16px se
+       stínem a BEZ rámečku
+     - sekční nadpisy: velké, 700, oranžové #E06236, prostrkané ~0.05em
+     - tlačítka: padding 14/28, radius 24px, 600; primární plné #E06236,
+       sekundární průhledné s rámečkem 2px
+     - vypíchnuté boxy: #FBF4EF, rámeček 2px #F0D6C7, radius 12px
+     - Montserrat 400/500/600/700
+
+   Mobile first, breakpointy 600 / 900 px.
+   ========================================================================= */
 
 :root {
-  --bg-page: #f5f5f5;
+  /* --- barvy JAKpoint --- */
+  --brand: #ed6d21;          /* primární oranžová v aplikaci portálu */
+  --brand-strong: #e06236;   /* oranžová nadpisů a tlačítek           */
+  --brand-light: #f07d35;
+  --brand-soft: rgba(224, 98, 54, 0.12);
+  --brand-tint: rgba(224, 98, 54, 0.06);
+
+  --text: #2b2826;
+  --text-muted: #6c655f;
+  --text-soft: #918a84;
+
+  --bg-page: #efeae5;
   --bg-surface: #ffffff;
-  --bg-soft: #fafafa;
-  --border-soft: #e5e5e5;
-  --accent: #ff6a00;
-  --accent-soft: rgba(255, 106, 0, 0.16);
-  --accent-strong: #e85a00;
-  --success: #20c997;
-  --danger: #ff4d4f;
-  --text-main: #222222;
-  --text-muted: #666666;
-  --text-soft: #999999;
-  --radius-lg: 18px;
+  --bg-soft: #fbf4ef;
+  --border: #f0d6c7;
+  --border-soft: #e2dcd5;
+
+  --success: #16a34a;
+  --success-soft: rgba(22, 163, 74, 0.1);
+  --danger: #ef4444;
+  --danger-soft: rgba(239, 68, 68, 0.1);
+
+  /* --- geometrie --- */
+  --radius-card: 16px;
   --radius-md: 12px;
-  --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.06);
-  --transition-fast: 0.2s ease-out;
+  --radius-pill: 24px;
+  --shadow-card: 0 8px 28px rgba(43, 40, 38, 0.08);
+  --shadow-raised: 0 14px 36px rgba(43, 40, 38, 0.16);
+  --transition: 0.2s ease-out;
 }
 
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-body {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  background: var(--bg-page);
-  color: var(--text-main);
-  font-size: 16px;                /* mobile base */
+/* Atribut hidden schovává jen přes UA styl, takže ho každé autorské
+   `display` (např. .pill) přebije. Tímto zůstane hidden spolehlivý. */
+[hidden] {
+  display: none !important;
 }
 
-/* =========================================
-   SHELL / LAYOUT
-========================================= */
+body {
+  font-family: Montserrat, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  background: var(--bg-page);
+  color: var(--text);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
 
-.app-shell,
-.shell {
+a {
+  color: var(--brand-strong);
+  font-weight: 600;
+}
+
+:focus-visible {
+  outline: 3px solid var(--brand-strong);
+  outline-offset: 3px;
+}
+
+/* Text jen pro čtečky obrazovky — stav dlaždice se kreslí barvou, takže musí
+   být dostupný i jako text. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* =========================================================================
+   SHELL A HLAVIČKA
+   -------------------------------------------------------------------------
+   Shell není karta, jen šířkové omezení. Bílé jsou až panely uvnitř, stejně
+   jako obsahové karty na jakpoint.cz.
+   ========================================================================= */
+
+.app-shell {
   max-width: 1200px;
   width: 100%;
-  margin: 12px auto;
-  padding: 16px 12px 14px;
-  background: var(--bg-surface);
-  border-radius: 18px;
-  border: 1px solid var(--border-soft);
-  box-shadow: var(--shadow-soft);
+  margin: 0 auto;
+  padding: 20px 16px 28px;
 }
 
-/* header */
-
-header,
-.header {
+header {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 14px;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 14px;
+  margin-bottom: 20px;
 }
 
 .brand {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 14px;
+  min-width: 0;
 }
 
 .brand-logo {
-  width: 30px;
-  height: 30px;
-  border-radius: 999px;
-  background: radial-gradient(circle at 30% 30%, #ffb36b 0, #ff6a00 45%, #e85a00 70%);
-  box-shadow: 0 0 0 2px #ffffff, 0 6px 16px rgba(0, 0, 0, 0.18);
+  width: 88px;
+  height: auto;
+  flex-shrink: 0;
 }
 
 .brand-text {
   display: flex;
   flex-direction: column;
-  gap: 1px;
+  gap: 2px;
+  min-width: 0;
+  padding-left: 14px;
+  border-left: 2px solid var(--border);
 }
 
 .brand-title {
-  font-size: 1.1rem;
-  font-weight: 600;
+  font-size: 1.3rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--text);
 }
 
 .brand-subtitle {
-  font-size: 0.9rem;
+  font-size: 0.85rem;
+  font-weight: 500;
   color: var(--text-muted);
+  line-height: 1.35;
 }
 
 .header-meta {
@@ -99,18 +158,20 @@ header,
   align-items: center;
 }
 
-/* pills */
+/* --- pilulky --- */
 
 .pill {
-  padding: 4px 10px;
-  border-radius: 999px;
-  border: 1px solid var(--border-soft);
-  font-size: 0.8rem;
-  color: var(--text-soft);
+  padding: 7px 16px;
+  border-radius: var(--radius-pill);
+  border: 2px solid var(--border);
   background: var(--bg-soft);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-muted);
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 7px;
+  line-height: 1.2;
 }
 
 .pill-dot {
@@ -121,157 +182,156 @@ header,
 }
 
 .pill-cta {
-  border-color: var(--accent-soft);
-  color: var(--accent-strong);
-  background: rgba(255, 106, 0, 0.06);
+  color: var(--brand-strong);
+  background: var(--brand-tint);
 }
 
-/* obecný layout uvnitř shellu */
-
-.layout {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);  /* mobile: 1 sloupec */
-  gap: 14px;
+.pill-bonus {
+  color: #ffffff;
+  background: var(--brand-strong);
+  border-color: var(--brand-strong);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
 }
 
-/* =========================================
-   KARTY / PANELY
-========================================= */
+/* =========================================================================
+   PANELY A KARTY
+   ========================================================================= */
 
 .board-panel,
-.info-panel,
 .card {
-  background: var(--bg-soft);
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--border-soft);
-  padding: 12px 12px 14px;
+  background: var(--bg-surface);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  padding: 24px 20px;
 }
 
 .panel-header {
   display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
   justify-content: space-between;
   align-items: flex-end;
-  margin-bottom: 8px;
+  margin-bottom: 18px;
 }
 
+/* Sekční nadpis v duchu .accent.section-title na jakpoint.cz. */
 .panel-title {
-  font-size: 0.85rem;
+  font-size: 1.3rem;
+  font-weight: 700;
+  line-height: 1.2;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--text-soft);
+  letter-spacing: 0.05em;
+  color: var(--brand-strong);
 }
 
 .panel-subtitle {
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   color: var(--text-muted);
+  margin-top: 6px;
+  max-width: 62ch;
 }
 
 .panel-status {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  gap: 2px;
-  font-size: 0.8rem;
-  color: var(--text-soft);
+  align-items: flex-start;
+  gap: 1px;
 }
 
 .status-label-compact {
-  font-size: 0.8rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-soft);
 }
 
-/* =========================================
-   LEGENDA A PROGRESS (hlavní stránka)
-========================================= */
+#progressText {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+/* =========================================================================
+   LEGENDA, PROGRES, RESET
+   ========================================================================= */
+
+.board-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
 
 .legend {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 12px;
-  font-size: 0.8rem;
-  color: var(--text-soft);
-  margin-bottom: 6px;
-  margin-top: 2px;
+  gap: 18px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text-muted);
 }
 
 .legend-item {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
 }
 
 .legend-dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 4px;
-  border: 1px solid var(--border-soft);
+  width: 14px;
+  height: 14px;
+  border-radius: 5px;
+  border: 2px solid var(--border-soft);
 }
 
-.legend-dot-green {
-  background: rgba(32, 201, 151, 0.2);
-  border-color: #20c997;
+.legend-dot-done {
+  background: var(--success-soft);
+  border-color: var(--success);
 }
 
-.legend-dot-red {
-  background: rgba(255, 77, 79, 0.2);
-  border-color: #ff4d4f;
-}
-
-.progress-meta {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 2px;
-  font-size: 0.8rem;
-  color: var(--text-soft);
-}
-
-.indicator-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 999px;
-  background: var(--accent-strong);
-  box-shadow: 0 0 0 4px var(--accent-soft);
+.legend-dot-failed {
+  background: var(--danger-soft);
+  border-color: var(--danger);
 }
 
 .progress-bar {
-  margin-top: 4px;
-  margin-bottom: 8px;
   width: 100%;
-  height: 6px;
-  border-radius: 999px;
-  background: #eaeaea;
+  height: 10px;
+  margin-bottom: 22px;
+  border-radius: var(--radius-pill);
+  background: var(--bg-soft);
+  border: 2px solid var(--border);
   overflow: hidden;
-  position: relative;
 }
 
 .progress-bar-fill {
-  position: absolute;
-  inset: 0;
+  height: 100%;
   width: 0%;
-  background: linear-gradient(90deg, #ff6a00, #ffb36b);
-  border-radius: inherit;
+  background: var(--brand-strong);
   transition: width 0.3s ease-out;
 }
 
-/* =========================================
-   GRID ŠACHOVNICE – MOBILE FIRST
-========================================= */
+/* =========================================================================
+   ŠACHOVNICE
+   ========================================================================= */
 
 .grid {
   display: grid;
-  grid-template-columns: minmax(0, 1fr); /* mobile: 1 sloupec */
-  gap: 10px;
-  margin-top: 4px;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 16px;
 }
 
-/* tablety: 2 sloupce */
 @media (min-width: 600px) {
   .grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
-/* desktop: 4 sloupce */
 @media (min-width: 900px) {
   .grid {
     grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -279,23 +339,20 @@ header,
 }
 
 .tile-wrapper {
-  perspective: 900px;
+  perspective: 1200px;
 }
 
 .tile {
   position: relative;
   width: 100%;
-  padding-top: 125%; /* trochu vyšší než čtverec – víc místa na QR + tlačítka */
-  cursor: pointer;
+  padding-top: 125%;
 }
 
 .tile-inner {
   position: absolute;
   inset: 0;
-  border-radius: var(--radius-md);
-  transition: transform var(--transition-fast);
   transform-style: preserve-3d;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  transition: transform 0.5s cubic-bezier(0.4, 0.1, 0.2, 1);
 }
 
 .tile.flipped .tile-inner {
@@ -305,298 +362,408 @@ header,
 .tile-face {
   position: absolute;
   inset: 0;
-  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--radius-card);
+  border: 0;
+  background: var(--bg-surface);
+  box-shadow: var(--shadow-card);
   backface-visibility: hidden;
-  border: 1px solid var(--border-soft);
   overflow: hidden;
 }
 
-/* front */
+/* --- přední strana --- */
 
 .tile-front {
-  background: linear-gradient(145deg, #ffffff, #f7f7f7);
-  display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 6px;
-  transition: background var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+  gap: 8px;
+  padding: 16px;
+  font: inherit;
+  color: inherit;
+  text-align: center;
+  cursor: pointer;
+  transition: transform var(--transition), box-shadow var(--transition);
 }
 
-.tile-front:hover {
-  background: #ffffff;
-  transform: translateY(-2px);
-  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.12);
+.tile-front:hover,
+.tile-front:focus-visible {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-raised);
 }
 
 .coord-label {
-  font-size: 1rem;
-  letter-spacing: 0.08em;
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: var(--accent-strong);
+  color: var(--brand-strong);
 }
 
 .coord-sub {
-  font-size: 0.8rem;
-  color: var(--text-muted);
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--text-soft);
 }
 
 .tile-status {
   position: absolute;
-  inset: 8px;
+  inset: 0;
   border-radius: inherit;
-  border: 2px solid transparent;
+  border: 3px solid transparent;
   pointer-events: none;
+  transition: border-color var(--transition), background var(--transition);
 }
 
 .tile-status.done {
   border-color: var(--success);
+  background: var(--success-soft);
 }
 
 .tile-status.failed {
   border-color: var(--danger);
+  background: var(--danger-soft);
 }
 
-/* back */
+.tile-status-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 24px;
+  height: 24px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.tile-status.done .tile-status-icon,
+.tile-status.failed .tile-status-icon {
+  display: flex;
+}
+
+.tile-status.done .tile-status-icon {
+  background: var(--success);
+}
+
+.tile-status.failed .tile-status-icon {
+  background: var(--danger);
+}
+
+/* --- zadní strana --- */
 
 .tile-back {
-  background: #ffffff;
   transform: rotateY(180deg);
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  padding: 10px 10px 10px;
-  gap: 6px;
+  padding: 14px;
+  gap: 10px;
 }
 
 .tile-back-top {
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
+  gap: 8px;
   flex-shrink: 0;
 }
 
 .badge {
-font-size: 0.8rem;
+  font-size: 0.72rem;
+  font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  padding: 3px 8px;
-  border-radius: 999px;
-  background: rgba(255, 106, 0, 0.08);
-  border: 1px solid var(--accent-soft);
-  color: var(--accent-strong);
+  padding: 5px 12px;
+  border-radius: var(--radius-pill);
+  background: var(--brand-tint);
+  border: 2px solid var(--border);
+  color: var(--brand-strong);
+  line-height: 1.2;
 }
 
-/* QR box – responzivní, bez fixní výšky */
+.tile-back .pill-bonus {
+  padding: 4px 10px;
+  font-size: 0.66rem;
+  border-width: 2px;
+}
 
 .qr-box {
-  flex: 1;                    /* vezme VŠECHEN zbylý prostor */
+  flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;           /* jistota, nic nevyteče */
+  min-height: 0;
+  border-radius: var(--radius-md);
+  background: var(--bg-soft);
+  border: 2px solid var(--border);
+  padding: 6px;
 }
 
 .qr-box img {
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: contain;        /* přizpůsobí se prostoru mezi nadpisem a tlačítky */
+  object-fit: contain;
 }
-
-/* tlačítka pod QR */
 
 .tile-back-actions {
   display: flex;
-  gap: 6px;
-  justify-content: space-between;
+  gap: 8px;
   align-items: center;
-  margin-top: 4px;
-  flex-shrink: 0;  
+  flex-shrink: 0;
 }
 
-/* =========================================
-   BUTTONS – MOBILE FIRST
-========================================= */
+.tile-back-actions .btn {
+  flex: 1;
+  white-space: nowrap;
+  padding: 9px 12px;
+  font-size: 0.8rem;
+}
+
+/* =========================================================================
+   TLAČÍTKA
+   ========================================================================= */
 
 .btn {
-  border-radius: 999px;
-  border: 1px solid transparent;
-  padding: 6px 10px;
-  font-size: 0.85rem;
+  padding: 14px 28px;
+  border-radius: var(--radius-pill);
+  border: 2px solid transparent;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.2;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 4px;
+  gap: 8px;
   background: transparent;
-  color: var(--text-main);
+  color: var(--text);
+  text-decoration: none;
+  transition: background var(--transition), color var(--transition),
+    border-color var(--transition), transform var(--transition),
+    box-shadow var(--transition);
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #ff6a00, #ff8c3a);
-  border-color: rgba(0, 0, 0, 0.04);
+  background: var(--brand-strong);
+  border-color: var(--brand-strong);
   color: #ffffff;
-  box-shadow: 0 8px 16px rgba(255, 106, 0, 0.25);
 }
 
 .btn-primary:hover {
+  background: var(--brand);
+  border-color: var(--brand);
   transform: translateY(-1px);
-  box-shadow: 0 10px 22px rgba(255, 106, 0, 0.32);
+  box-shadow: 0 8px 20px rgba(224, 98, 54, 0.3);
+}
+
+.btn-secondary {
+  border-color: var(--brand-strong);
+  color: var(--brand-strong);
+}
+
+.btn-secondary:hover {
+  background: var(--brand-strong);
+  color: #ffffff;
 }
 
 .btn-ghost {
-  border-color: var(--border-soft);
-  color: var(--text-soft);
-  background: #ffffff;
+  border-color: var(--border);
+  color: var(--text-muted);
+  background: var(--bg-soft);
 }
 
 .btn-ghost:hover {
-  background: #f7f7f7;
+  background: var(--bg-surface);
+  border-color: var(--brand-strong);
+  color: var(--brand-strong);
 }
 
-.tile-back-actions .btn-primary,
-.tile-back-actions .btn-ghost {
-  flex: 1;
-  white-space: nowrap;
+.btn-reset {
+  padding: 9px 18px;
+  font-size: 0.8rem;
 }
 
-/* desktop – větší tlačítka */
+/* =========================================================================
+   STRÁNKA MISE
+   -------------------------------------------------------------------------
+   Karty jdou vždy pod sebe, i na širokých obrazovkách. Vedle sebe by ubíraly
+   šířku videu s avatarem, které je na stránce to hlavní.
+   ========================================================================= */
 
-@media (min-width: 900px) {
-  .btn {
-    padding: 10px 18px;
-    font-size: 1.0rem;
-  }
-}
-
-/* =========================================
-   MISSION PAGES (mise-X-Y)
-========================================= */
 .mission-page {
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
-/* jistota, že se nepoužije starý grid .layout / .mission-layout */
-.mission-layout {
-  display: block;
-  grid-template-columns: none;
-}
-
-.mission-card-left,
-.mission-card-right {
-  width: 100%;
+/* Karta je široká jako stránka, ale text se čte líp v omezené míře řádku.
+   Videa a QR se to netýká, ta zůstávají na plnou šířku. */
+.mission-name,
+.mission-goal,
+.mission-tip,
+.status-info {
+  max-width: 78ch;
 }
 
 .mission-name {
-  font-size: 1.1rem;
-  font-weight: 600;
-  margin-bottom: 4px;
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.3;
+  margin: 14px 0 10px;
 }
 
 .mission-goal {
-  font-size: 0.95rem;
+  font-size: 1rem;
   color: var(--text-muted);
-  line-height: 1.5;
-  margin-bottom: 8px;
+  margin-bottom: 16px;
 }
 
-.mission-meta {
-  font-size: 0.85rem;
-  color: var(--text-soft);
-  margin-bottom: 8px;
+/* Vypíchnutý box podle .ident na jakpoint.cz. */
+.mission-tip {
+  display: flex;
+  gap: 12px;
+  font-size: 0.92rem;
+  color: var(--text);
+  background: var(--bg-soft);
+  border: 2px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  margin-bottom: 20px;
 }
 
-/* video – full width, 16:9 */
+.mission-tip-label {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 0.8rem;
+  line-height: 1.75;
+  color: var(--brand-strong);
+  flex-shrink: 0;
+}
+
+/* --- avatar --- */
 
 .video-container {
   width: 100%;
-  margin-top: 6px;
   border-radius: var(--radius-md);
-  border: 1px solid var(--border-soft);
   overflow: hidden;
-  background: #000;
+  background: #17140f;
 }
 
 .video-container iframe {
   display: block;
   width: 100%;
   aspect-ratio: 16 / 9;
-  height: auto;
   border: 0;
 }
 
-/* vyhodnocení mise */
+/* --- vyhodnocení --- */
 
 .status-controls {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 16px;
+  margin-top: 16px;
 }
 
 .status-buttons {
   display: flex;
-  flex-wrap: nowrap;
-  gap: 8px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* Na mobilu užší odsazení, aby se obě tlačítka vešla vedle sebe; na desktopu
+   plný padding jako u ostatních tlačítek a strop šířky, protože karta je
+   široká jako celá stránka. */
+.status-buttons .btn {
+  flex: 1 1 auto;
+  max-width: 230px;
+  padding-inline: 16px;
+  background: var(--bg-surface);
+  border-color: var(--border);
+  color: var(--text);
+}
+
+@media (min-width: 600px) {
+  .status-buttons .btn {
+    padding-inline: 28px;
+  }
+}
+
+.status-buttons .btn:hover {
+  border-color: var(--brand-strong);
+  color: var(--brand-strong);
+}
+
+.status-buttons #btnDone[aria-pressed="true"],
+.status-buttons #btnDone[aria-pressed="true"]:hover {
+  border-color: var(--success);
+  color: var(--success);
+  background: var(--success-soft);
+}
+
+.status-buttons #btnFailed[aria-pressed="true"],
+.status-buttons #btnFailed[aria-pressed="true"]:hover {
+  border-color: var(--danger);
+  color: var(--danger);
+  background: var(--danger-soft);
 }
 
 .status-info {
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   color: var(--text-muted);
-  line-height: 1.4;
 }
 
 .status-label {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  font-size: 0.9rem;
+  gap: 10px;
+  font-size: 0.92rem;
+  font-weight: 600;
 }
 
 .status-dot {
-  width: 9px;
-  height: 9px;
-  border-radius: 999px;
-  background: var(--accent-strong);
-  box-shadow: 0 0 0 4px var(--accent-soft);
+  width: 10px;
+  height: 10px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--brand-strong);
+  box-shadow: 0 0 0 4px var(--brand-soft);
+  transition: background var(--transition), box-shadow var(--transition);
 }
 
-/* základní tlačítko mise */
-.status-buttons .btn {
-  background: #ffffff;
-  color: var(--text-main);
-  border-radius: 999px;
-  border: 2px solid var(--border-soft);
-     transition: border-color 0.2s ease, color 0.2s ease;
+.status-dot.done {
+  background: var(--success);
+  box-shadow: 0 0 0 4px var(--success-soft);
 }
 
-/* aktivní stav – splnil jsem = zelený rámeček */
-.status-buttons .btn.btn-done-active {
-  border-color: #20c997 !important;          /* zelená */
-  color: #20c997 !important;
-     background: rgba(32, 201, 151, 0.06) !important;
+.status-dot.failed {
+  background: var(--danger);
+  box-shadow: 0 0 0 4px var(--danger-soft);
 }
 
-/* aktivní stav – nesplnil jsem = oranžový rámeček */
-.status-buttons .btn.btn-failed-active {
-  border-color: #ff6a00 !important;          /* oranžová */
-  color: #ff6a00 !important;
-     background: rgba(255, 106, 0, 0.06) !important;
+.mission-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding-top: 18px;
+  border-top: 2px solid var(--border);
 }
 
-
-
-/* footer */
+/* =========================================================================
+   FOOTER
+   ========================================================================= */
 
 .footer {
-  margin-top: 12px;
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
   font-size: 0.8rem;
+  font-weight: 500;
   color: var(--text-soft);
 }
 
@@ -605,41 +772,62 @@ font-size: 0.8rem;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    gap: 16px;
   }
 }
 
-/* =========================================
-   DESKTOP ÚPRAVY (větší písmo/rozestupy)
-========================================= */
+/* =========================================================================
+   DESKTOP
+   ========================================================================= */
 
 @media (min-width: 900px) {
-  body {
-    font-size: 18px;
+  .app-shell {
+    padding: 32px 24px 40px;
   }
 
-  .app-shell,
-  .shell {
-    margin: 24px auto;
-    padding: 24px 24px 20px;
+  header {
+    margin-bottom: 28px;
+  }
+
+  .brand-logo {
+    width: 128px;
   }
 
   .brand-title {
-    font-size: 1.4rem;
+    font-size: 1.6rem;
   }
 
   .brand-subtitle {
-    font-size: 1.0rem;
+    font-size: 0.95rem;
+  }
+
+  .board-panel,
+  .card {
+    padding: 36px 40px;
   }
 
   .panel-title {
-    font-size: 0.95rem;
+    font-size: 1.6rem;
   }
 
-  .panel-subtitle {
-    font-size: 0.95rem;
+  .mission-name {
+    font-size: 1.5rem;
   }
 
-  .mission-layout {
-    grid-template-columns: minmax(0, 2fr) minmax(0, 1.2fr);
+  .grid {
+    gap: 20px;
+  }
+}
+
+/* =========================================================================
+   OMEZENÍ ANIMACÍ
+   ========================================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
   }
 }

@@ -2,207 +2,94 @@
 <html lang="cs">
 <head>
   <meta charset="UTF-8">
-  <title>Leadership Akademie – Šachovnice</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leadership Akademie – Šachovnice misí</title>
+  <meta name="description" content="Gamifikovaná šachovnice 16 misí s AI avatarem pro ředitele škol. Součást vzdělávacího portálu JAKpoint.">
+  <meta name="robots" content="noindex">
+
+  <link rel="icon" href="favicon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="app-shell">
     <header>
       <div class="brand">
-        <div class="brand-logo"></div>
+        <img class="brand-logo" src="img/jakpoint-logo.png" alt="JAKpoint" width="320" height="219">
         <div class="brand-text">
-          <div class="brand-title">Leadership Akademie</div>
-          <div class="brand-subtitle">Gamifikovaná šachovnice pro ředitele škol</div>
+          <h1 class="brand-title">Leadership Akademie</h1>
+          <p class="brand-subtitle">Gamifikovaná šachovnice pro ředitele škol</p>
         </div>
       </div>
       <div class="header-meta">
-        <div class="pill">
-          <span class="pill-dot"></span>
+        <span class="pill">
+          <span class="pill-dot" aria-hidden="true"></span>
           Režim mise
-        </div>
-        <div class="pill pill-cta">
-          16 misí · úroveň: Ředitel – Leader
-        </div>
+        </span>
+        <span class="pill pill-cta">16 misí · úroveň: Ředitel – Leader</span>
       </div>
     </header>
 
-    <div class="layout">
-  <section class="board-panel">
-  <div class="panel-header">
-    <div>
-      <div class="panel-title">Šachovnice misí</div>
-      <div class="panel-subtitle">
-        Klikni na libovolné pole X.Y, odhal misi a naskenuj QR nebo ji otevři tlačítkem.
-      </div>
-    </div>
-    <div class="panel-status">
-      <span class="status-label-compact">Stav misí</span>
-      <span id="progressText">0 / 16 dokončených</span>
-    </div>
+    <main>
+      <section class="board-panel" aria-labelledby="boardTitle">
+        <div class="panel-header">
+          <div>
+            <h2 class="panel-title" id="boardTitle">Šachovnice misí</h2>
+            <p class="panel-subtitle">
+              Klikni na libovolné pole X.Y, odhal misi a naskenuj QR nebo ji otevři tlačítkem.
+            </p>
+          </div>
+          <div class="panel-status">
+            <span class="status-label-compact">Stav misí</span>
+            <span id="progressText">0 / 16 dokončených</span>
+          </div>
+        </div>
+
+        <div class="board-toolbar">
+          <div class="legend">
+            <span class="legend-item">
+              <span class="legend-dot legend-dot-done" aria-hidden="true"></span>
+              Splněno
+            </span>
+            <span class="legend-item">
+              <span class="legend-dot legend-dot-failed" aria-hidden="true"></span>
+              Nesplněno
+            </span>
+          </div>
+          <button type="button" class="btn btn-ghost btn-reset" id="btnReset">
+            Začít od začátku
+          </button>
+        </div>
+
+        <div
+          class="progress-bar"
+          id="progressBar"
+          role="progressbar"
+          aria-label="Dokončené mise"
+          aria-valuemin="0"
+          aria-valuemax="16"
+          aria-valuenow="0"
+        >
+          <div class="progress-bar-fill" id="progressFill"></div>
+        </div>
+
+        <!-- dlaždice generuje board.js z dat v missions.js -->
+        <div class="grid" id="board"></div>
+
+        <p class="sr-only" id="boardAnnouncer" role="status" aria-live="polite"></p>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span>Leadership Akademie – gamifikovaný trénink pro ředitele škol</span>
+      <span>16 misí · Živly, Kmenové vůdcovství, Situační vedení a Posouvání lidí po úrovních</span>
+    </footer>
   </div>
 
-  <!-- LEGENDA -->
-  <div class="legend">
-    <span class="legend-item">
-      <span class="legend-dot legend-dot-green"></span>
-      Splněno
-    </span>
-    <span class="legend-item">
-      <span class="legend-dot legend-dot-red"></span>
-      Nesplněno
-    </span>
-  </div>
-
-  <!-- PROGRESS BAR -->
-  <div class="progress-bar">
-    <div class="progress-bar-fill" id="progressFill"></div>
-  </div>
-
-  <!-- ŠACHOVNICE -->
-  <div class="grid" id="board">
-    <!-- generuje JS -->
-  </div>
-</section>
-</div>
-      
-    </div>
-  </div>
-
-  <script>
-    const ROWS = 4;
-    const COLS = 4;
-    const TOTAL_MISSIONS = ROWS * COLS;
-    const BOARD_ELEMENT = document.getElementById('board');
-    const STORAGE_PREFIX = 'leadership_akademie_mise_';
-
-    function createBoard() {
-      for (let x = 1; x <= ROWS; x++) {
-        for (let y = 1; y <= COLS; y++) {
-          const coord = x + '.' + y;
-          const tileWrapper = document.createElement('div');
-          tileWrapper.className = 'tile-wrapper';
-
-          const tile = document.createElement('div');
-          tile.className = 'tile';
-          tile.dataset.x = x;
-          tile.dataset.y = y;
-
-          const tileInner = document.createElement('div');
-          tileInner.className = 'tile-inner';
-
-          const front = document.createElement('div');
-          front.className = 'tile-face tile-front';
-
-          const coordLabel = document.createElement('div');
-          coordLabel.className = 'coord-label';
-          coordLabel.textContent = 'Mise ' + coord;
-
-          const coordSub = document.createElement('div');
-          coordSub.className = 'coord-sub';
-          coordSub.textContent = 'Klikni pro odhalení';
-
-          const statusOverlay = document.createElement('div');
-          statusOverlay.className = 'tile-status';
-          statusOverlay.id = 'status-' + x + '-' + y;
-
-          front.appendChild(coordLabel);
-          front.appendChild(coordSub);
-          front.appendChild(statusOverlay);
-
-          const back = document.createElement('div');
-          back.className = 'tile-face tile-back';
-
-          const backTop = document.createElement('div');
-          backTop.className = 'tile-back-top';
-
-          const badge = document.createElement('div');
-          badge.className = 'badge';
-          badge.textContent = 'MISE ' + coord;
-
-          
-          backTop.appendChild(badge);
-
-          const qrBox = document.createElement('div');
-          qrBox.className = 'qr-box';
-
-          const qrImg = document.createElement('img');
-          // QR obrázky: ./qr/qr-mise-X-Y.png
-          qrImg.src = './qr/qr-mise-' + x + '-' + y + '.png';
-          qrImg.alt = 'QR kód pro misi ' + coord;
-
-          qrBox.appendChild(qrImg);
-
-          const backActions = document.createElement('div');
-          backActions.className = 'tile-back-actions';
-
-          const openBtn = document.createElement('a');
-          openBtn.className = 'btn btn-primary';
-          openBtn.textContent = 'Otevřít misi';
-          openBtn.href = 'mise-' + x + '-' + y + '.html';
-
-          const closeBtn = document.createElement('button');
-          closeBtn.className = 'btn btn-ghost';
-          closeBtn.type = 'button';
-          closeBtn.textContent = 'Zavřít';
-
-          backActions.appendChild(openBtn);
-          backActions.appendChild(closeBtn);
-
-          back.appendChild(backTop);
-          back.appendChild(qrBox);
-          back.appendChild(backActions);
-
-          tileInner.appendChild(front);
-          tileInner.appendChild(back);
-          tile.appendChild(tileInner);
-          tileWrapper.appendChild(tile);
-          BOARD_ELEMENT.appendChild(tileWrapper);
-
-          tile.addEventListener('click', function (e) {
-            if (e.target === closeBtn) return;
-            tile.classList.toggle('flipped');
-          });
-
-          closeBtn.addEventListener('click', function (e) {
-            e.stopPropagation();
-            tile.classList.remove('flipped');
-          });
-        }
-      }
-    }
-
-    function loadStatus() {
-      let doneCount = 0;
-      for (let x = 1; x <= ROWS; x++) {
-        for (let y = 1; y <= COLS; y++) {
-          const statusEl = document.getElementById('status-' + x + '-' + y);
-          if (!statusEl) continue;
-          const key = STORAGE_PREFIX + x + '_' + y;
-          const value = localStorage.getItem(key);
-
-          statusEl.classList.remove('done', 'failed');
-
-          if (value === 'done') {
-            statusEl.classList.add('done');
-            doneCount++;
-          } else if (value === 'failed') {
-            statusEl.classList.add('failed');
-          }
-        }
-      }
-
-      const progressText = document.getElementById('progressText');
-      const fill = document.getElementById('progressFill');
-      const percent = Math.round((doneCount / TOTAL_MISSIONS) * 100);
-      progressText.textContent = doneCount + ' / ' + TOTAL_MISSIONS + ' dokončených';
-      fill.style.width = percent + '%';
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-      createBoard();
-      loadStatus();
-    });
-  </script>
+  <script src="missions.js"></script>
+  <script src="progress.js"></script>
+  <script src="board.js"></script>
 </body>
 </html>

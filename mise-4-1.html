@@ -2,134 +2,83 @@
 <html lang="cs">
 <head>
   <meta charset="UTF-8">
-  <title>Mise 4.1 – Leadership Akademie</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mise 4.1 – Leadership Akademie</title>
+  <meta name="description" content="Mise 4.1 Leadership Akademie – trénink vedení s AI avatarem.">
+  <meta name="robots" content="noindex">
+
+  <link rel="icon" href="favicon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <div class="app-shell">
+<!-- Obsah mise se bere z missions.js podle data-mission. Needituj texty tady. -->
+<body data-mission="4.1">
+  <div class="app-shell">
     <header>
       <div class="brand">
-        <div class="brand-logo"></div>
+        <img class="brand-logo" src="img/jakpoint-logo.png" alt="JAKpoint" width="320" height="219">
         <div class="brand-text">
-          <div class="brand-title">Leadership Akademie</div>
-          <div class="brand-subtitle">Mise 4.1 – Kmenové vůdcovství</div>
+          <h1 class="brand-title">Leadership Akademie</h1>
+          <p class="brand-subtitle" id="brandSubtitle"></p>
         </div>
       </div>
       <div class="header-meta">
-        <div class="pill">
-          Souřadnice: 4.1
-        </div>
-        <div class="pill pill-cta">
-          Šachovnice misí · Ředitel – Leader
-        </div>
+        <span class="pill pill-bonus" id="bonusPill" hidden>Bonusová mise</span>
       </div>
     </header>
 
-    <!-- JEDEN SLOUPEC: nejdřív zadání, pak vyhodnocení -->
     <main class="mission-page">
-      <section class="card mission-card-left">
-        <h2 class="panel-title">Zadání mise</h2>
-        <div class="mission-name">Mise 4.1: Posouvej učitele. </div>
-        <div class="mission-goal">
-           Vyzkoušej jak posunout učitele z úrovně 3 na 4. Po skončení rozhovoru si připrav krátkou reflexi, kterou můžeš sdílet.
-        </div>
-        <div class="mission-meta">
-          Tip: Připomeň si, co pomáhá posouvat z úrovně 3 na vyšší úroveň v rámci kmenového vůdcovství.  
-        </div>
+      <section class="card" aria-labelledby="missionHeading">
+        <h2 class="panel-title" id="missionHeading">Zadání mise</h2>
+        <p class="mission-name" id="missionName"></p>
+        <p class="mission-goal" id="missionGoal"></p>
+        <p class="mission-tip">
+          <span class="mission-tip-label">Tip</span>
+          <span id="missionTip"></span>
+        </p>
 
         <div class="video-container">
           <iframe
-             src="https://embed.liveavatar.com/v1/901df7fa-b13f-4afe-bf48-266f487adcad"
+            id="avatarFrame"
             allow="microphone"
-            title="LiveAvatar Embed">
-          </iframe>
+            title="AI avatar"
+            loading="lazy"
+          ></iframe>
         </div>
       </section>
 
-      <!-- VYHODNOCENÍ MISE -->
-      <section class="card mission-card-right">
-        <h2 class="panel-title">Vyhodnocení mise</h2>
+      <section class="card" aria-labelledby="evalHeading">
+        <h2 class="panel-title" id="evalHeading">Vyhodnocení mise</h2>
         <div class="status-controls">
           <div class="status-buttons">
-            <!-- NEUTRÁLNÍ BTN BEZ ORANŽOVÉHO POZADÍ -->
-            <button class="btn status-btn" id="btnDone">Splnil jsem</button>
-            <button class="btn status-btn" id="btnFailed">Nesplnil jsem</button>
+            <button type="button" class="btn" id="btnDone" aria-pressed="false">Splnil jsem</button>
+            <button type="button" class="btn" id="btnFailed" aria-pressed="false">Nesplnil jsem</button>
           </div>
-          <p class="status-info">
-            Po označení výsledku se stav mise uloží v tomto prohlížeči. Po návratu na šachovnici bude pole 4.1 zvýrazněno
-            zeleně (splněno) nebo červeně (nesplněno).
+
+          <p class="status-info" id="statusInfo"></p>
+
+          <p class="status-label" role="status" aria-live="polite">
+            <span class="status-dot" id="statusDot" aria-hidden="true"></span>
+            <span id="statusText">Mise zatím není označena.</span>
           </p>
 
-          <div class="status-label">
-            <span class="status-dot"></span>
-            <span id="statusText">Mise zatím není označena.</span>
+          <div class="mission-actions">
+            <a class="btn btn-secondary" href="index.html">Zpět na šachovnici</a>
           </div>
-
-          <button class="btn btn-ghost" id="btnBack">Zpět na šachovnici</button>
         </div>
       </section>
     </main>
 
-    <div class="footer">
+    <footer class="footer">
       <span>Leadership Akademie – gamifikovaný trénink pro ředitele škol</span>
-      <span>Mise 4.1 · Kmenové vůdcovství & živly</span>
-    </div>
+      <span id="footerMission"></span>
+    </footer>
   </div>
 
-  <script>
-    const x = 4;
-    const y = 1;
-    const STORAGE_KEY = 'leadership_akademie_mise_' + x + '_' + y;
-
-    const btnDone = document.getElementById('btnDone');
-    const btnFailed = document.getElementById('btnFailed');
-    const btnBack = document.getElementById('btnBack');
-    const statusText = document.getElementById('statusText');
-    const statusDot = document.querySelector('.status-dot');
-
-    function applyVisualState(value) {
-      // reset tříd
-      btnDone.classList.remove('btn-done-active');
-      btnFailed.classList.remove('btn-failed-active');
-
-      if (value === 'done') {
-        btnDone.classList.add('btn-done-active');
-        statusDot.style.backgroundColor = '#20c997';      // zelený semafor
-        statusDot.style.boxShadow = '0 0 0 4px rgba(32,201,151,0.25)';
-        statusText.textContent = 'Mise je označena jako splněná.';
-      } else if (value === 'failed') {
-        btnFailed.classList.add('btn-failed-active');
-        statusDot.style.backgroundColor = '#ff6a00';      // oranžový semafor
-        statusDot.style.boxShadow = '0 0 0 4px rgba(255,106,0,0.25)';
-        statusText.textContent = 'Mise je označena jako nesplněná.';
-      } else {
-        statusDot.style.backgroundColor = 'var(--accent-strong)';
-        statusDot.style.boxShadow = '0 0 0 4px var(--accent-soft)';
-        statusText.textContent = 'Mise zatím není označena.';
-      }
-    }
-
-    function updateStatusLabel() {
-      const value = localStorage.getItem(STORAGE_KEY);
-      applyVisualState(value);
-    }
-
-    btnDone.addEventListener('click', () => {
-      localStorage.setItem(STORAGE_KEY, 'done');
-      applyVisualState('done');
-    });
-
-    btnFailed.addEventListener('click', () => {
-      localStorage.setItem(STORAGE_KEY, 'failed');
-      applyVisualState('failed');
-    });
-
-    btnBack.addEventListener('click', () => {
-      window.location.href = 'index.html';
-    });
-
-    document.addEventListener('DOMContentLoaded', updateStatusLabel);
-  </script>
+  <script src="missions.js"></script>
+  <script src="progress.js"></script>
+  <script src="mission.js"></script>
 </body>
 </html>

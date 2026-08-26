@@ -1,0 +1,12 @@
+{
+  "name": "leadership-akademie",
+  "private": true,
+  "description": "Modul avatara Leadership Akademie – statická šachovnice misí",
+  "scripts": {
+    "qr:test": "node tools/gen-qr.mjs https://aileadermisehero.github.io/LeadershipAkademie/",
+    "qr:prod": "node tools/gen-qr.mjs https://jakpoint.cz/ProMilana/"
+  },
+  "devDependencies": {
+    "qrcode": "^1.5.4"
+  }
+}
